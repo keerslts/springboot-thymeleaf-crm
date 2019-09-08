@@ -17,9 +17,14 @@ import java.util.Map;
 public class IndexController {
 
     private static final String INDEX = "index";
+    private static final String LOGIN = "login";
     @Autowired
     private MusicInfoService musicInfoService;
 
+    @RequestMapping("/login")
+    public String getLogin(HttpServletRequest request, @RequestParam(value = "name", defaultValue = "springboot-thymeleaf") String name) {
+        return LOGIN;
+    }
     @RequestMapping("/index")
     public String getIndex(HttpServletRequest request, @RequestParam(value = "name", defaultValue = "springboot-thymeleaf") String name) {
         return INDEX;
