@@ -4,6 +4,7 @@ import com.angus.dao.pojo.MusicInfo;
 import com.angus.service.MusicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,13 +20,13 @@ public class IndexController {
     @Autowired
     private MusicInfoService musicInfoService;
 
-    @RequestMapping("/show")
+    @RequestMapping("/index")
     public String getIndex(HttpServletRequest request, @RequestParam(value = "name", defaultValue = "springboot-thymeleaf") String name) {
         return INDEX;
     }
 
     @RequestMapping("/account")
-    public String getAccount(Map<String,Object> map){
+    public String getAccount(ModelMap map){
 
         MusicInfo person = new MusicInfo();
         person.setId(1);
