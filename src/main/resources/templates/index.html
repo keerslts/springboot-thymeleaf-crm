@@ -12,7 +12,7 @@
 <br />
 <h1 style="text-align: center;width:100%;">CRM管理系统</h1>
 <br />
-
+<div th:text="${session.rightLevel}"></div>
 <br />
 <br />
 <hr />
@@ -21,14 +21,13 @@
 <br />
 
 <div class='text1'  style="text-align: center">
-    <div th:if="${session.rightLevel}==1">
-
-        <h2>账号信息管理	<input style="width:100px;height:30px" type="button" value="进入" onclick="window.location.href='account'" /></h2>
+    <div th:if="${session.rightLevel}==0">
+        <h2>账号信息管理	<input style="width:100px;height:30px" type="button" value="进入" onclick="window.location.href='accountShow'" /></h2>
     </div>
-    <br />
-    学生课时录入	<input style="width:100px;height:30px" type="button" value="进入" onclick="window.location.href='getAllStudents.do'" />
-    <br />
-    学生信息修改	<input style="width:100px;height:30px" type="button" value="进入" onclick="window.location.href='updateStudentsInfo.do'" />
+    <br/>
+        <h2>客户管理系统	<input style="width:100px;height:30px" type="button" value="进入" onclick="window.location.href='customerShow'"/></h2>
+    <br/>
+        <h2>订单管理系统	<input style="width:100px;height:30px" type="button" value="进入" onclick="window.location.href='orderShow'" /></h2>
 </div>
 
 

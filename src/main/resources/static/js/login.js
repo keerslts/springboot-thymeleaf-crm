@@ -17,12 +17,10 @@
           alert(wrongMessage);
     }
 
-//jquery初始化
-        $(function() {
-//        if()
-var a = $('#harden').val();
-//alert(session.getAttribute("wrongMessage"));
-//alert(${session.wrongMessage});
-alert(a)
-        // 初始化内容
-                     });
+        //jquery初始化
+    $(function() {
+        var wrongMessage = $('#wrongMessage').val();
+        if(wrongMessage!=undefined){
+            alert(wrongMessage)
+        }
+    });

@@ -59,7 +59,6 @@ public class IndexController {
     @RequestMapping(value = "/userLogin",method = RequestMethod.POST)
     public String getLoginResult (@ModelAttribute("user") @Validated User user,
                                   @ModelAttribute("message") Message message,
-                                  BindingResult rs,
                                   HttpServletRequest request)
     {
         httpSession = request.getSession();
@@ -68,28 +67,20 @@ public class IndexController {
         String passWord = user.getPassWord();
 
         List<User> userResults = null;
-//        List<User> userResults = userService.getUserByNameAndPassword(user);
+        userResults = userService.getUserByNameAndPassword(user);
         //没有查到登录用户
         if(userResults==null||userResults.size()==0){
             httpSession.setAttribute("wrongMessage","未查询到当前用户！");
-            message.setWrongMessage("为查询到当前用户！");
+            message.setWrongMessage("未查询到当前用户！");
             return LOGIN;
         }
 
         //查询到登陆用户，默认只取第一个用户（不允许同名同密码用户）
         User currentUser = userResults.get(0);
 
-
         httpSession.setAttribute("rightLevel",currentUser.getRightLevel());
         httpSession.setAttribute("id",currentUser.getId());
         httpSession.setAttribute("userName",user.getUserName());
-
-        if (rs.hasErrors()) {
-            for (ObjectError error : rs.getAllErrors()) {
-                System.out.println(error.getDefaultMessage());
-            }
-            return "index";
-        }
 
         //验证成功，我们可以返回到自己想去的界面了，我这个地方直接返回到添加的界面
         return "index";
