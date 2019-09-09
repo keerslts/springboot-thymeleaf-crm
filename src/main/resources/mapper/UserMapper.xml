@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.angus.dao.mapper.UserMapper">
+
+
+    <resultMap id="baseResultMap" type="com.angus.dao.pojo.User">
+        <id column="id" property="id" />
+        <result column="userName" property="userName" />
+        <result column="passWord"  property="passWord" />
+        <result column="rightLevel"  property="rightLevel" />
+    </resultMap>
+
+
+    <select id="getUserByNameAndPassword" resultMap="baseResultMap">
+        SELECT * FROM user where userName=#{userName} and passWord=#{passWord}
+    </select>
+
+
+
+
+</mapper>
