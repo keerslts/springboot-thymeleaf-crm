@@ -16,14 +16,16 @@
 <hr />
 <br />
 <br />
+<!--获取session中的userName -->
+<!--<div th:text="${session.userName}"></div> -->
 <br />
 
-<div class='text1'>
+<div class='text1' style="text-align: center">
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
-    <form action="#" th:action="@{/add}" th:object="${userInfo}" method="post">
-        <div><span>用户名</span><input type="text" th:field="*{username}" />  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></div>
-        <div><span>密码</span><input type="text" th:field="*{password}" />  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></div>
-        <input type="submit" />
+    <form action="#" th:action="@{/userLogin}" th:object="${user}" method="post">
+        <div><span>用户名</span><input type="text" th:field="*{userName}" />  <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></span></div>
+        <div><span>密码</span><input type="text" th:field="*{passWord}" />  <span th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></span></div>
+        <input type="submit" value="登陆" id="loginBtn" />
     </form>
 </div>
 
