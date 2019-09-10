@@ -10,20 +10,36 @@
 <br />
 <h1 style="text-align: center;width:100%;">CRM管理系统</h1>
 <br />
-
+<h1 style="text-align: center;width:100%;">账号信息管理</h1>
 <br />
 <br />
 <hr />
 <br />
 <br />
 <br />
+<table style="center" border="3">
+<tr>
+    <td>姓名</td>
+    <td>ID</td>
+    <td>权限</td>
+    <td>操作</td>
+
+</tr>
+
+<tr th:each="user:${userList}">
+    <td th:text="${user.userName}"></td>
+    <td th:text="${user.Id}"></td>
+    <td th:text="${user.rightLevel}"></td>
+    <td>
+<!--        <button th:onclike=editUserInfo("${user.Id}") >提交</button>-->
+        <button class="btn" th:onclick="window.location.href='editUserInfo?id='+[[${user.Id}]]">提交</button>
+    </td>
 
 
 
-
-    <p th:text="'hello, ' + ${name} + '!'" />
+</tr>
+</table>
+<!--    <p th:text="'hello, ' + ${name} + '!'" />-->
 <!--    <p th:text="'hello, ' + ${person.name} + '!'" />-->
-<td th:text="${person.id}"></td>
-<td th:text="${person.musicName}"></td>
 </body>
 </html>
