@@ -17,7 +17,7 @@
 <br />
 <br />
 <br />
-<table style="center" border="3">
+<table style="text-align: center" border="3">
 <tr>
     <td>姓名</td>
     <td>ID</td>
@@ -32,14 +32,15 @@
     <td th:text="${user.rightLevel}"></td>
     <td>
 <!--        <button th:onclike=editUserInfo("${user.Id}") >提交</button>-->
-        <button class="btn" th:onclick="window.location.href='editUserInfo?id='+[[${user.Id}]]">提交</button>
+        <button class="btn" th:onclick="window.location.href='editUserInfo?id='+[[${user.Id}]]">修改</button>
     </td>
-
-
-
 </tr>
 </table>
-<!--    <p th:text="'hello, ' + ${name} + '!'" />-->
-<!--    <p th:text="'hello, ' + ${person.name} + '!'" />-->
+
+
+<button class="btn" th:onclick="window.location.href='addNewUser'">新增用户</button>
+
+
+
 </body>
 </html>
