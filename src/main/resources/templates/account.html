@@ -32,7 +32,7 @@
     <td th:text="${user.rightLevel}"></td>
     <td>
 <!--        <button th:onclike=editUserInfo("${user.Id}") >提交</button>-->
-        <button class="btn" th:onclick="window.location.href='editUserInfo?id='+[[${user.Id}]]">修改</button>
+        <button class="btn" th:onclick="window.location.href='editUserInfo?Id='+[[${user.Id}]]">修改该用户</button>
     </td>
 </tr>
 </table>

@@ -10,9 +10,23 @@
         <result column="rightLevel"  property="rightLevel" />
     </resultMap>
 
-
+    <!--    通过用户名和密码获取用户  登陆用户  -->
     <select id="getUserByNameAndPassword" resultMap="baseResultMap">
         SELECT * FROM user where userName=#{userName} and passWord=#{passWord}
+    </select>
+
+    <!--    根据id查询用户信息    -->
+    <select id="getUserById" resultMap="baseResultMap">
+        SELECT * FROM user where Id=#{Id}
+    </select>
+
+    <!--    根据id更新用户信息    -->
+    <select id="updateUserById" >
+        UPDATE user set Id=#{Id},userName=#{userName},passWord=#{passWord},rightLevel=#{rightLevel} where Id=#{Id}
+    </select>
+    <!--    根据id删除用户信息    -->
+    <select id="deleteUserById" >
+        delete from user where Id=#{Id}
     </select>
 
 

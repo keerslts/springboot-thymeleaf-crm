@@ -1,29 +1,21 @@
 package com.angus.web;
 
-import com.angus.dao.pojo.Message;
-import com.angus.dao.pojo.MusicInfo;
 import com.angus.dao.pojo.User;
-import com.angus.service.MusicInfoService;
 import com.angus.service.UserService;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.security.auth.login.LoginContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -31,8 +23,8 @@ public class IndexController {
     private static final String INDEX = "index";
     private static final String LOGIN = "login";
     private static final String ACCOUNT = "account";
-    @Autowired
-    private MusicInfoService musicInfoService;
+    private static final String EDITUSERINFO = "editUserInfo";
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -97,43 +89,73 @@ public class IndexController {
         }
         return INDEX;
     }
+
+    /**
+     * 查询某个用户并返回给用户编辑界面
+     * @param request
+     * @param user
+     * @return
+     */
     @RequestMapping("/editUserInfo")
-    public String editUserInfo(HttpServletRequest request,Integer id,User user) {
-        httpSession.setAttribute("wrongMessage","");
+    public String editUserInfo(HttpServletRequest request, @ModelAttribute("user") User user) {
+//        httpSession.setAttribute("wrongMessage","");
+
         if(!userSessionCheck(request)){
             //如果session信息中没有用户信息
-            return LOGIN;
+//            return LOGIN;
         }
-        return INDEX;
+
+        User currentUser = userService.getUserById(user.getId());
+        user = currentUser;
+
+        return EDITUSERINFO;
     }
 
     @RequestMapping("/accountShow")
     public String getAccount(ModelMap map){
+
+        getAllAccount(map);
+
+        return ACCOUNT;
+    }
+
+    public void getAllAccount(ModelMap map){
 
         List<User> userList = new ArrayList<User>();
         User user = new User();
         user.setId(1);
         user.setUserName("1");
         user.setRightLevel(1);
+        user.setPassWord("1");
         userList.add(user);
         User user1 = new User();
         user1.setId(2);
         user1.setUserName("2");
         user1.setRightLevel(2);
+        user1.setPassWord("2");
         userList.add(user1);
 
 
         map.put("userList", userList);
 
-        return "account";
     }
 
 
-    @RequestMapping("/music")
-    @ResponseBody
-    public List<MusicInfo> getMusicInfo(MusicInfo musicInfo) {
-        List<MusicInfo> musicInfoList = musicInfoService.getMusicInfo(null);
-        return musicInfoList;
+    @RequestMapping("/updateUser")
+    public String updateUser(HttpServletRequest request, @ModelAttribute("user") User user, ModelMap map) {
+
+//        userService.updateUserById(user.getId());
+
+        getAllAccount(map);
+        return ACCOUNT;
+    }
+
+    @RequestMapping("/deleteCurrentUser")
+    public String deleteUser(HttpServletRequest request, @ModelAttribute("user") User user, ModelMap map) {
+
+        userService.deleteUserById(user.getId());
+        getAllAccount(map);
+        return ACCOUNT;
     }
 
 

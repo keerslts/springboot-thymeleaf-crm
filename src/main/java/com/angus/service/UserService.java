@@ -8,4 +8,9 @@ public interface UserService
 
     public List<User> getUserByNameAndPassword (User user);
 
+    User getUserById (Integer id);
+
+    void updateUserById (Integer id);
+
+    void deleteUserById (Integer id);
 }
