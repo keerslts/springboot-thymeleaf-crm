@@ -10,7 +10,9 @@ public interface UserService
 
     User getUserById (Integer id);
 
-    void updateUserById (Integer id);
+    void updateUser (User user);
 
     void deleteUserById (Integer id);
+
+    List<User> getAllUser();
 }

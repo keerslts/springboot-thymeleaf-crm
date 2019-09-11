@@ -57,11 +57,11 @@ public class IndexController {
     {
         httpSession = request.getSession();
         //获取填入的用户信息
-        String userName = user.getUserName();
-        String passWord = user.getPassWord();
+//        String userName = user.getUserName();
+//        String passWord = user.getPassWord();
 
         List<User> userResults = null;
-//        userResults = userService.getUserByNameAndPassword(user);
+        userResults = userService.getUserByNameAndPassword(user);
         //没有查到登录用户
         if(userResults==null||userResults.size()==0){
             httpSession.setAttribute("wrongMessage","未查询到当前用户！");
@@ -102,11 +102,14 @@ public class IndexController {
 
         if(!userSessionCheck(request)){
             //如果session信息中没有用户信息
-//            return LOGIN;
+            return LOGIN;
         }
 
         User currentUser = userService.getUserById(user.getId());
-        user = currentUser;
+        user.setId(currentUser.getId());
+        user.setUserName(currentUser.getUserName());
+        user.setPassWord(currentUser.getPassWord());
+        user.setRightLevel(currentUser.getRightLevel());
 
         return EDITUSERINFO;
     }
@@ -115,25 +118,25 @@ public class IndexController {
     public String getAccount(ModelMap map){
 
         getAllAccount(map);
-
         return ACCOUNT;
     }
 
     public void getAllAccount(ModelMap map){
 
         List<User> userList = new ArrayList<User>();
-        User user = new User();
-        user.setId(1);
-        user.setUserName("1");
-        user.setRightLevel(1);
-        user.setPassWord("1");
-        userList.add(user);
-        User user1 = new User();
-        user1.setId(2);
-        user1.setUserName("2");
-        user1.setRightLevel(2);
-        user1.setPassWord("2");
-        userList.add(user1);
+        userList = userService.getAllUser();
+//        User user = new User();
+//        user.setId(1);
+//        user.setUserName("1");
+//        user.setRightLevel(1);
+//        user.setPassWord("1");
+//        userList.add(user);
+//        User user1 = new User();
+//        user1.setId(2);
+//        user1.setUserName("2");
+//        user1.setRightLevel(2);
+//        user1.setPassWord("2");
+//        userList.add(user1);
 
 
         map.put("userList", userList);
@@ -144,8 +147,7 @@ public class IndexController {
     @RequestMapping("/updateUser")
     public String updateUser(HttpServletRequest request, @ModelAttribute("user") User user, ModelMap map) {
 
-//        userService.updateUserById(user.getId());
-
+        userService.updateUser(user);
         getAllAccount(map);
         return ACCOUNT;
     }

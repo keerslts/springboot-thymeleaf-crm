@@ -26,14 +26,19 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public void updateUserById (Integer id)
+    public void updateUser (User user)
     {
-        userMapper.updateUserById(id);
+        userMapper.updateUser(user);
     }
 
     @Override
     public void deleteUserById (Integer id)
     {
         userMapper.deleteUserById(id);
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userMapper.getAllUser();
     }
 }

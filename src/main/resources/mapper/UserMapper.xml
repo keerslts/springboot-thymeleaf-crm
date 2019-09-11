@@ -15,15 +15,21 @@
         SELECT * FROM user where userName=#{userName} and passWord=#{passWord}
     </select>
 
+    <!--    获取所有用户  -->
+    <select id="getAllUser" resultMap="baseResultMap">
+        SELECT * FROM user
+    </select>
+
     <!--    根据id查询用户信息    -->
     <select id="getUserById" resultMap="baseResultMap">
         SELECT * FROM user where Id=#{Id}
     </select>
 
     <!--    根据id更新用户信息    -->
-    <select id="updateUserById" >
-        UPDATE user set Id=#{Id},userName=#{userName},passWord=#{passWord},rightLevel=#{rightLevel} where Id=#{Id}
-    </select>
+    <update id="updateUser" >
+<!--        UPDATE user set userName='test2',passWord='test2',rightLevel=1 where Id=2-->
+        UPDATE user set userName=#{userName},passWord=#{passWord},rightLevel=#{rightLevel} where Id=#{Id}
+    </update>
     <!--    根据id删除用户信息    -->
     <select id="deleteUserById" >
         delete from user where Id=#{Id}

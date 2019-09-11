@@ -9,9 +9,11 @@ public interface UserMapper
 {
     List<User> getUserByNameAndPassword(User user);
 
-    User getUserById (Integer Id);
+    User getUserById(Integer Id);
 
-    void updateUserById (Integer id);
+    void updateUser(User user);
 
-    void deleteUserById (Integer id);
+    void deleteUserById(Integer id);
+
+    List<User> getAllUser();
 }
