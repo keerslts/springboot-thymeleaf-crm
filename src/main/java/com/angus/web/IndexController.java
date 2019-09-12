@@ -23,7 +23,8 @@ public class IndexController {
     private static final String INDEX = "index";
     private static final String LOGIN = "login";
     private static final String ACCOUNT = "account";
-    private static final String EDITUSERINFO = "editUserInfo";
+    private static final String EDIT_USER_INFO = "editUserInfo";
+    private static final String ADD_NEW_USER = "addNewUser";
 
     @Autowired
     private UserService userService;
@@ -111,7 +112,7 @@ public class IndexController {
         user.setPassWord(currentUser.getPassWord());
         user.setRightLevel(currentUser.getRightLevel());
 
-        return EDITUSERINFO;
+        return EDIT_USER_INFO;
     }
 
     @RequestMapping("/accountShow")
@@ -156,6 +157,23 @@ public class IndexController {
     public String deleteUser(HttpServletRequest request, @ModelAttribute("user") User user, ModelMap map) {
 
         userService.deleteUserById(user.getId());
+        getAllAccount(map);
+        return ACCOUNT;
+    }
+
+    @RequestMapping("/addNewUserShow")
+    public String addNewUserShow(HttpServletRequest request, User user) {
+//        if(!userSessionCheck(request)){
+//            //如果session信息中没有用户信息
+//            return LOGIN;
+//        }
+        return ADD_NEW_USER;
+    }
+
+    @RequestMapping("/addNewUser")
+    public String addNewUser(HttpServletRequest request, @ModelAttribute("user") User user, ModelMap map) {
+
+        userService.addNewUser(user);
         getAllAccount(map);
         return ACCOUNT;
     }

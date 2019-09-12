@@ -27,8 +27,11 @@
 
     <!--    根据id更新用户信息    -->
     <update id="updateUser" >
-<!--        UPDATE user set userName='test2',passWord='test2',rightLevel=1 where Id=2-->
         UPDATE user set userName=#{userName},passWord=#{passWord},rightLevel=#{rightLevel} where Id=#{Id}
+    </update>
+    <!--    新增用户信息    -->
+    <update id="addNewUser" >
+        INSERT INTO user VALUES(#{Id},#{userName},#{passWord},#{rightLevel})
     </update>
     <!--    根据id删除用户信息    -->
     <select id="deleteUserById" >
