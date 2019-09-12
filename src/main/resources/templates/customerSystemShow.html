@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>crm 系统</title>
+</head>
+
+<body>
+
+<br />
+<h1 style="text-align: center;width:100%;">CRM管理系统</h1>
+<br />
+<h1 style="text-align: center;width:100%;">客户信息管理系统</h1>
+<br />
+<br />
+<hr />
+<br />
+<br />
+<br />
+<table style="text-align: center" border="3">
+<tr>
+    <td>姓名</td>
+    <td>ID</td>
+    <td>权限</td>
+    <td>操作</td>
+
+</tr>
+
+<!--<tr th:each="user:${userList}">-->
+<!--    <td th:text="${user.userName}"></td>-->
+<!--    <td th:text="${user.Id}"></td>-->
+<!--    <td th:text="${user.rightLevel}"></td>-->
+<!--    <td>-->
+<!--        <button class="btn" th:onclick="window.location.href='editUserInfo?Id='+[[${user.Id}]]">修改该用户</button>-->
+<!--    </td>-->
+<!--</tr>-->
+</table>
+
+
+<button class="btn" th:onclick="window.location.href='addNewUserShow'">新增用户</button>
+
+
+
+</body>
+</html>
