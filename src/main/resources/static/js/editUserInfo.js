@@ -16,7 +16,7 @@
            alert("用户权限不能为空");
            return;
          }else if(rightLevel<1||rightLevel>3){
-           alert("用户权限只能在1～3之间的整数");
+           alert("用户权限只能在1～3之间的整数");a
            return;
          }
     }

@@ -19,25 +19,35 @@
 <br />
 <table style="text-align: center" border="3">
 <tr>
-    <td>姓名</td>
     <td>ID</td>
-    <td>权限</td>
+    <td>行业</td>
+    <td>客户名称</td>
+    <td>联系人</td>
+    <td>手机</td>
+    <td>邮箱</td>
+    <td>地区</td>
+    <td>合作情况</td>
     <td>操作</td>
 
 </tr>
 
-<!--<tr th:each="user:${userList}">-->
-<!--    <td th:text="${user.userName}"></td>-->
-<!--    <td th:text="${user.Id}"></td>-->
-<!--    <td th:text="${user.rightLevel}"></td>-->
-<!--    <td>-->
-<!--        <button class="btn" th:onclick="window.location.href='editUserInfo?Id='+[[${user.Id}]]">修改该用户</button>-->
-<!--    </td>-->
-<!--</tr>-->
+    <tr th:each="customer:${customerList}">
+<!--        <input type="hidden" th:field="${customer.id}" />-->
+        <td type="hidden" th:text="${customer.id}"></td>
+        <td th:text="${customer.business}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.linkMan}"></td>
+        <td th:text="${customer.phoneNumber}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.district}"></td>
+        <td th:text="${customer.cooperationStatus}"></td>
+        <td>
+            <button class="btn" th:onclick="window.location.href='editCustomerInfo?Id='+[[${customer.Id}]]">修改该客户信息</button>
+        </td>
+    </tr>
 </table>
 
-
-<button class="btn" th:onclick="window.location.href='addNewUserShow'">新增用户</button>
+<button class="btn" style="text-align: center" th:onclick="window.location.href='addNewCustomerShow'">新增用户</button>
 
 
 
