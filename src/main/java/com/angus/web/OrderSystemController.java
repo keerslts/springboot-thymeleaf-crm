@@ -1,7 +1,9 @@
 package com.angus.web;
 
 import com.angus.dao.pojo.Customer;
+import com.angus.dao.pojo.Order;
 import com.angus.service.CustomerService;
+import com.angus.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +27,7 @@ public class OrderSystemController
     private static final String EDIT_CUSTOMER_INFO = "editCustomerInfo";
 
     @Autowired
-    private CustomerService customerService;
+    private OrderService orderService;
     ;
     @Autowired
     private HttpSession httpSession;
@@ -36,7 +38,7 @@ public class OrderSystemController
      * @return
      */
     @RequestMapping("/orderSystemShow")
-    public String showLogin(ModelMap map) {
+    public String showOrderList(ModelMap map) {
 
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
@@ -44,9 +46,9 @@ public class OrderSystemController
 
     private void getAllOrders(ModelMap map) {
 
-        List<Customer> customerList = new ArrayList<Customer>();
-        customerList = customerService.getAllCustomers();
-        map.put("customerList", customerList);
+        List<Order> orderrList = new ArrayList<Order>();
+        orderrList = orderService.getAllOrders();
+        map.put("customerList", orderrList);
     }
 
     @RequestMapping("/addNewCustomerShow")
@@ -56,42 +58,41 @@ public class OrderSystemController
     }
 
     @RequestMapping("/addNewCustomer")
-    public String addNewUser(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String addNewUser(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
 
-        customerService.addNewCustomer(customer);
+        orderService.addNewOrder(order);
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
 
     @RequestMapping("/editCustomerInfo")
-    public String editUserInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
+    public String editUserInfo(HttpServletRequest request, @ModelAttribute("order") Order order) {
 
 
-        Customer currentCustomer = customerService.getCustomerById(customer.getId());
-        customer.setId(currentCustomer.getId());
-        customer.setBusiness(currentCustomer.getBusiness());
-        customer.setCooperationStatus(currentCustomer.getCooperationStatus());
-        customer.setDistrict(currentCustomer.getDistrict());
-        customer.setEmail(currentCustomer.getEmail());
-        customer.setLinkMan(currentCustomer.getLinkMan());
-        customer.setName(currentCustomer.getName());
-        customer.setPhoneNumber(currentCustomer.getPhoneNumber());
+        Order currentOrder = orderService.getOrderById(order.getId());
+        order.setId(currentOrder.getId());
+        order.setCharge(currentOrder.getCharge());
+        order.setMoneySituation(currentOrder.getMoneySituation());
+        order.setOrderDate(currentOrder.getOrderDate());
+        order.setOrderNumber(currentOrder.getOrderNumber());
+        order.setServiceProject(currentOrder.getServiceProject());
+        order.setServiceStatus(currentOrder.getServiceStatus());
 
         return EDIT_CUSTOMER_INFO;
     }
 
     @RequestMapping("/updateCustomer")
-    public String updateUser(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String updateUser(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
 
-        customerService.updateCustomer(customer);
+        orderService.updateOrder(order);
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
 
     @RequestMapping("/deleteCurrentCustomer")
-    public String deleteCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String deleteCustomer(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
 
-        customerService.deleteCustomerById(customer.getId());
+        orderService.deleteOrderById(order.getId());
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
