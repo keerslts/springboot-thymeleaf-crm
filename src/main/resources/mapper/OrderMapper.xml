@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.angus.dao.mapper.OrderMapper">
+
+
+    <resultMap id="baseResultMap" type="com.angus.dao.pojo.Order">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="business"  property="business" />
+        <result column="linkMan"  property="linkMan" />
+        <result column="phoneNumber"  property="phoneNumber" />
+        <result column="email"  property="email" />
+        <result column="district"  property="district" />
+        <result column="cooperationStatus"  property="cooperationStatus" />
+    </resultMap>
+
+    <!--    获取所有用户  -->
+    <select id="getAllOrders" resultMap="baseResultMap">
+        SELECT * FROM order
+    </select>
+    <!--    获取所有用户  -->
+    <select id="addNewOrder" resultMap="baseResultMap">
+        INSERT INTO order VALUES(#{Id},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus})
+    </select>
+
+    <!--    根据id查询用户信息    -->
+    <select id="getOrderById" resultMap="baseResultMap">
+        SELECT * FROM order where Id=#{Id}
+    </select>
+
+    <!--    根据id删除用户信息    -->
+    <select id="deleteOrderById" >
+        delete from order where Id=#{Id}
+    </select>
+
+    <!--    根据id更新用户信息    -->
+    <update id="updateOrder" >
+        UPDATE order set
+        name=#{name},business=#{business},linkMan=#{linkMan},phoneNumber=#{phoneNumber},email=#{email},district=#{district},cooperationStatus=#{cooperationStatus}
+        where Id=#{Id}
+    </update>
+
+</mapper>

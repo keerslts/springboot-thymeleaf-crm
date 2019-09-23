@@ -46,9 +46,9 @@ public class OrderSystemController
 
     private void getAllOrders(ModelMap map) {
 
-        List<Order> orderrList = new ArrayList<Order>();
-        orderrList = orderService.getAllOrders();
-        map.put("customerList", orderrList);
+        List<Order> orderList = new ArrayList<Order>();
+        orderList = orderService.getAllOrders();
+        map.put("orderList", orderList);
     }
 
     @RequestMapping("/addNewCustomerShow")
