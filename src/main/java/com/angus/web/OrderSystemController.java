@@ -1,8 +1,6 @@
 package com.angus.web;
 
-import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.Order;
-import com.angus.service.CustomerService;
 import com.angus.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +20,9 @@ public class OrderSystemController
     private static final String INDEX = "index";
     private static final String LOGIN = "login";
     private static final String ACCOUNT = "account";
-    private static final String ADD_NEW_CUSTOMER = "addNewCustomer";
+    private static final String ADD_NEW_ORDER = "addNewOrder";
     private static final String ORDER_SYSTEM_SHOW = "orderSystemShow";
-    private static final String EDIT_CUSTOMER_INFO = "editCustomerInfo";
+    private static final String EDIT_ORDER_INFO = "editOderInfo";
 
     @Autowired
     private OrderService orderService;
@@ -51,22 +49,22 @@ public class OrderSystemController
         map.put("orderList", orderList);
     }
 
-    @RequestMapping("/addNewCustomerShow")
-    private String addNewCustomerShow(Customer customer) {
+    @RequestMapping("/addNewOrderShow")
+    private String addNewOrderShow(Order order) {
 
-        return ADD_NEW_CUSTOMER;
+        return ADD_NEW_ORDER;
     }
 
-    @RequestMapping("/addNewCustomer")
-    public String addNewUser(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
+    @RequestMapping("/addNewOrder")
+    public String addNewOrder(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
 
         orderService.addNewOrder(order);
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
 
-    @RequestMapping("/editCustomerInfo")
-    public String editUserInfo(HttpServletRequest request, @ModelAttribute("order") Order order) {
+    @RequestMapping("/editOrderInfo")
+    public String editOrderInfo(HttpServletRequest request, @ModelAttribute("order") Order order) {
 
 
         Order currentOrder = orderService.getOrderById(order.getId());
@@ -78,19 +76,19 @@ public class OrderSystemController
         order.setServiceProject(currentOrder.getServiceProject());
         order.setServiceStatus(currentOrder.getServiceStatus());
 
-        return EDIT_CUSTOMER_INFO;
+        return EDIT_ORDER_INFO;
     }
 
-    @RequestMapping("/updateCustomer")
-    public String updateUser(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
+    @RequestMapping("/updateOrder")
+    public String updateOrder(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
 
         orderService.updateOrder(order);
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
 
-    @RequestMapping("/deleteCurrentCustomer")
-    public String deleteCustomer(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
+    @RequestMapping("/deleteCurrentOrder")
+    public String deleteOrder(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
 
         orderService.deleteOrderById(order.getId());
         getAllOrders(map);

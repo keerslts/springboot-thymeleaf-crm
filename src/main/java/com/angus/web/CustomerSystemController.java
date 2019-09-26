@@ -1,9 +1,7 @@
 package com.angus.web;
 
 import com.angus.dao.pojo.Customer;
-import com.angus.dao.pojo.User;
 import com.angus.service.CustomerService;
-import com.angus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,11 +33,10 @@ public class CustomerSystemController
 
     /**
      * 展示登陆界面
-     * 该方法中的user给前台返回
      * @return
      */
     @RequestMapping("/customerSystemShow")
-    public String showLogin(ModelMap map) {
+    public String showCustomerSystem(ModelMap map) {
 
         getAllCustomers(map);
         return CUSTOMER_SYSTEM_SHOW;
@@ -59,7 +56,7 @@ public class CustomerSystemController
     }
 
     @RequestMapping("/addNewCustomer")
-    public String addNewUser(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String addNewCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
 
         customerService.addNewCustomer(customer);
         getAllCustomers(map);
@@ -67,7 +64,7 @@ public class CustomerSystemController
     }
 
     @RequestMapping("/editCustomerInfo")
-    public String editUserInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
+    public String editCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
 
 
         Customer currentCustomer = customerService.getCustomerById(customer.getId());
@@ -84,7 +81,7 @@ public class CustomerSystemController
     }
 
     @RequestMapping("/updateCustomer")
-    public String updateUser(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String updateCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
 
         customerService.updateCustomer(customer);
         getAllCustomers(map);
