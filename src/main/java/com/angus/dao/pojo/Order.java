@@ -1,5 +1,6 @@
 package com.angus.dao.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Order {
@@ -8,7 +9,10 @@ public class Order {
 
     private String orderNumber;
 
+    private String orderName;
+
     //下单日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date orderDate;
 
     //服务项目
@@ -78,4 +82,13 @@ public class Order {
         this.moneySituation = moneySituation;
     }
 
+    public String getOrderName ()
+    {
+        return orderName;
+    }
+
+    public void setOrderName (String orderName)
+    {
+        this.orderName = orderName;
+    }
 }

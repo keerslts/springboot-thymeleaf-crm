@@ -22,19 +22,21 @@
 <br />
 <div class='text1' style="text-align: center">
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
-    <form action="#" th:action="@{/addNewOrder}" th:object="${list}" method="post" onSubmit="return checkUpdateUser()">
-        <div><span>订单编号</span><input type="text" th:field="*{id}" /> </div>
-        <div><span>订单名称</span><input type="text" th:field="*{orderName}" /> </div>
-        <div><span>下单日期</span><input type="text" th:field="*{orderDate}"/>  </div>
-        <div><span>客户名称</span><input type="text" th:field="*{orderDate}"/>  </div>
-        <div><span>联系人</span><input type="text" th:field="*{orderDate}"/>  </div>
-        <div><span>邮箱</span><input type="text" th:field="*{orderDate}"/>  </div>
-        <div><span>服务项目</span><input type="text" th:field="*{serviceProject}" />  </div>
-        <div><span>收费</span><input type="text" th:field="*{phoneNumber}" />  </div>
-        <div><span>到款情况</span><input type="text" th:field="*{email}" />  </div>
-        <div><span>服务状态</span><input type="text" th:field="*{district}" />  </div>
+    <form action="#" th:action="@{/addNewOrder}" th:object="${orderCustomer}"  method="post" onSubmit="return checkUpdateUser()">
+        <div><span>订单编号</span><input type="text" th:field="*{order.orderNumber}" /> </div>
+        <div><span>订单名称</span><input type="text" th:field="*{order.orderName}" /> </div>
+        <div><span>下单日期</span><input type="datetime-local" th:field="*{order.orderDate}"/>  </div>
+<!--        <div><span>下单日期</span><input type="text" th:field="*{order.orderDate}" th:text="${#dates.format(new java.util.Date().getTime(),'yyyy-MM-dd hh:mm:ss')}"/>  </div>-->
+<!--        <div><span>客户名称</span><input type="text" th:field="*{customer.name}"/>  </div>-->
+<!--        <div><span>联系人</span><input type="text" th:field="*{customer.linkMan}"/>  </div>-->
+<!--        <div><span>邮箱</span><input type="text" th:field="*{customer.email}"/>  </div>-->
+        <div><span>服务项目</span><input type="text" th:field="*{order.serviceProject}" />  </div>
+        <div><span>收费</span><input type="text" th:field="*{order.charge}" />  </div>
+        <div><span>到款情况</span><input type="text" th:field="*{order.moneySituation}" />  </div>
+        <div><span>服务状态</span><input type="text" th:field="*{order.serviceStatus}" />  </div>
+        <div> <button class="btn" th:onclick="window.location.href='addRelatedCustomer?orderCustomer='+orderCustomer">关联客户</button> </div>
 
-        <input type="submit" value="添加新客户" />
+        <input type="submit" value="添加新订单" />
 </form>
 </div>
 

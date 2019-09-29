@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>crm 系统</title>
+</head>
+
+<body>
+
+<br />
+<h1 style="text-align: center;width:100%;">CRM管理系统</h1>
+<br />
+<h1 style="text-align: center;width:100%;">客户信息管理系统</h1>
+<br />
+<br />
+<hr />
+<br />
+<br />
+<br />
+<table style="text-align: center" border="3">
+<tr>
+    <td>ID</td>
+    <td>行业</td>
+    <td>客户名称</td>
+    <td>联系人</td>
+    <td>手机</td>
+    <td>邮箱</td>
+    <td>地区</td>
+    <td>合作情况</td>
+    <td>操作</td>
+
+</tr>
+
+    <tr th:each="customer:${customerList}">
+<!--        <input type="hidden" th:field="${customer.id}" />-->
+        <td type="hidden" th:text="${customer.id}"></td>
+        <td th:text="${customer.business}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.linkMan}"></td>
+        <td th:text="${customer.phoneNumber}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.district}"></td>
+        <td th:text="${customer.cooperationStatus}"></td>
+        <td>
+            <button class="btn" th:onclick="window.location.href='addNewOrder2?Id='+[[${customer.Id}]]&OrderCustomer='+OrderCustomer">选择该客户</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.angus.web;
 
 import com.angus.dao.pojo.Customer;
+import com.angus.dao.pojo.OrderCustomer;
 import com.angus.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class CustomerSystemController
     private static final String ADD_NEW_CUSTOMER = "addNewCustomer";
     private static final String CUSTOMER_SYSTEM_SHOW = "customerSystemShow";
     private static final String EDIT_CUSTOMER_INFO = "editCustomerInfo";
+    private static final String CHOOSE_ONE_CUSTOMER = "chooseOneCustomer";
 
     @Autowired
     private CustomerService customerService;
@@ -94,5 +96,13 @@ public class CustomerSystemController
         customerService.deleteCustomerById(customer.getId());
         getAllCustomers(map);
         return CUSTOMER_SYSTEM_SHOW;
+    }
+
+    @RequestMapping("/addRelatedCustomer")
+    public String addRelatedCustomer(HttpServletRequest request, @ModelAttribute("orderCustomer")
+                    OrderCustomer orderCustomer, ModelMap map) {
+
+        getAllCustomers(map);
+        return CHOOSE_ONE_CUSTOMER;
     }
 }

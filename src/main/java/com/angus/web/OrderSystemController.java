@@ -1,6 +1,7 @@
 package com.angus.web;
 
 import com.angus.dao.pojo.Order;
+import com.angus.dao.pojo.OrderCustomer;
 import com.angus.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,15 +52,22 @@ public class OrderSystemController
     }
 
     @RequestMapping("/addNewOrderShow")
-    private String addNewOrderShow(Order order) {
+    private String addNewOrderShow(OrderCustomer orderCustomer) {
 
         return ADD_NEW_ORDER;
     }
 
     @RequestMapping("/addNewOrder")
-    public String addNewOrder(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
+    public String addNewOrder(HttpServletRequest request, @ModelAttribute("orderCustomer") OrderCustomer orderCustomer, ModelMap map) {
 
-        orderService.addNewOrder(order);
+//        orderService.addNewOrder(order);
+        getAllOrders(map);
+        return ORDER_SYSTEM_SHOW;
+    }
+    @RequestMapping("/addNewOrder2")
+    public String addNewOrderLast(HttpServletRequest request, @ModelAttribute("orderCustomer") OrderCustomer orderCustomer,Integer id, ModelMap map) {
+
+//        orderService.addNewOrder(order);
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
