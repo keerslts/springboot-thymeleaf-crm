@@ -3,28 +3,28 @@
 <mapper namespace="com.angus.dao.mapper.OrderMapper">
 
 
-    <resultMap id="baseResultMap" type="com.angus.dao.pojo.Order">
+    <resultMap id="orderBaseResultMap" type="com.angus.dao.pojo.Order">
         <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="business"  property="business" />
-        <result column="linkMan"  property="linkMan" />
-        <result column="phoneNumber"  property="phoneNumber" />
-        <result column="email"  property="email" />
-        <result column="district"  property="district" />
-        <result column="cooperationStatus"  property="cooperationStatus" />
+        <result column="orderNumber" property="orderNumber" />
+        <result column="orderName"  property="orderName" />
+        <result column="orderDate"  property="orderDate" />
+        <result column="serviceProject"  property="serviceProject" />
+        <result column="charge"  property="charge" />
+        <result column="moneySituation"  property="moneySituation" />
+        <result column="serviceStatus"  property="serviceStatus" />
     </resultMap>
 
     <!--    获取所有用户  -->
-    <select id="getAllOrders" resultMap="baseResultMap">
-        SELECT * FROM order
+    <select id="getAllOrders" resultMap="orderBaseResultMap">
+        SELECT * FROM `order`
     </select>
     <!--    获取所有用户  -->
-    <select id="addNewOrder" resultMap="baseResultMap">
+    <select id="addNewOrder" resultMap="orderBaseResultMap">
         INSERT INTO order VALUES(#{Id},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus})
     </select>
 
     <!--    根据id查询用户信息    -->
-    <select id="getOrderById" resultMap="baseResultMap">
+    <select id="getOrderById" resultMap="orderBaseResultMap">
         SELECT * FROM order where Id=#{Id}
     </select>
 

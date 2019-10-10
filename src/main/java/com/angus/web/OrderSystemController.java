@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class OrderSystemController
@@ -46,9 +47,10 @@ public class OrderSystemController
 
     private void getAllOrders(ModelMap map) {
 
-        List<Order> orderList = new ArrayList<Order>();
-        orderList = orderService.getAllOrders();
-        map.put("orderList", orderList);
+        List<Map> orderCustomerList = new ArrayList<Map>();
+//        orderList = orderService.getAllOrders();
+        orderCustomerList = orderService.getAllOrderCustomers();
+        map.put("orderCustomerList", orderCustomerList);
     }
 
     @RequestMapping("/addNewOrderShow")

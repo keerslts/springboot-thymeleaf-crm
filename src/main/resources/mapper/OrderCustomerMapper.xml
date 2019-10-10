@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.angus.dao.mapper.OrderCustomerMapper">
+
+
+    <resultMap id="orderCustomerBaseResultMap" type="com.angus.dao.pojo.OrderCustomer">
+        <id column="id" property="id" />
+        <result column="orderNumber" property="orderNumber" />
+        <result column="orderName"  property="orderName" />
+        <result column="orderDate"  property="orderDate" />
+        <result column="serviceProject"  property="serviceProject" />
+        <result column="charge"  property="charge" />
+        <result column="moneySituation"  property="moneySituation" />
+        <result column="serviceStatus"  property="serviceStatus" />
+        <result column="name"  property="name" />
+        <result column="linkMan"  property="linkMan" />
+        <result column="email"  property="email" />
+    </resultMap>
+
+    <!--    获取所有用户  -->
+    <select id="getAllOrderCustomers" resultType="java.util.Map">
+        SELECT * FROM `order` o1 left join res_orderCustomer r1 on o1.Id=r1.orderId LEFT JOIN customer c1 ON
+        r1.customerId=c1.Id
+    </select>
+
+
+</mapper>

@@ -1,9 +1,9 @@
 package com.angus.service;
 
-import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.Order;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderService
 {
@@ -17,4 +17,6 @@ public interface OrderService
     void updateOrder(Order order);
 
     void deleteOrderById(Integer id);
+
+    List<Map> getAllOrderCustomers();
 }
