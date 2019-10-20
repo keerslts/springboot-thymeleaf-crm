@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>crm 系统</title>
+</head>
+
+<script src="./js/jQuery.js"></script>
+<script src="./js/editUserInfo.js"></script>
+
+<body>
+
+<br/>
+<h1 style="text-align: center;width:100%;">CRM管理系统</h1>
+<br/>
+<h1 style="text-align: center;width:100%;">订单信息修改</h1>
+<br/>
+<br/>
+<div class='text1' style="text-align: center">
+    <button class="btn" th:onclick="window.location.href='index'">回到首页</button>
+</div>
+<hr/>
+<br/>
+<br/>
+<br/>
+<div class='text1' style="text-align: center">
+
+    <form action="#" th:action="@{/updateOrder}" th:object="${orderCustomer}" method="post">
+        <div><span>订单编号</span><input type="text" th:field="${orderCustomer.order.orderNumber}"/></div>
+        <div><span>下单日期</span><input type="text" th:field="${orderCustomer.order.orderDate}"/></div>
+        <div><span>客户名称</span><input type="text" disabled="disabled" th:field="${orderCustomer.customer.linkMan}"/>
+        </div>
+        <div><span>联系人</span><input type="text" disabled="disabled" th:field="${orderCustomer.customer.phoneNumber}"/>
+        </div>
+        <div><span>邮箱</span><input type="text" disabled="disabled" th:field="${orderCustomer.customer.email}"/></div>
+        <div><span>服务项目</span><input type="text" th:field="${orderCustomer.order.serviceProject}"/></div>
+        <div><span>收费</span><input type="text" th:field="${orderCustomer.order.charge}"/></div>
+        <div><span>到款情况</span><input type="text" th:field="${orderCustomer.order.moneySituation}"/></div>
+        <div><span>服务状态</span><input type="text" th:field="${orderCustomer.order.serviceStatus}"/></div>
+        <input type="hidden" th:field="${orderCustomer.order.orderId}"/>
+        <input type="submit" value="修改客户信息"/>
+    </form>
+
+    <div>
+        <button class="btn"
+                th:onclick="window.location.href='addRelatedCustomer?Id='+[[${orderCustomer.Id}]]+'&order.orderId='+[[${orderCustomer.order.orderId}]]">
+            更换关联客户
+        </button>
+    </div>
+    <button style="text-align: center" class="btn"
+            th:onclick="window.location.href='deleteCurrentOrder?order.orderId='+[[${orderCustomer.order.orderId}]]">删除该订单
+    </button>
+
+</div>
+
+
+</body>
+</html>

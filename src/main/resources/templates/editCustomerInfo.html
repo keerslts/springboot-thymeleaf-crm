@@ -16,6 +16,9 @@
 <h1 style="text-align: center;width:100%;">账号信息修改</h1>
 <br />
 <br />
+<div class='text1' style="text-align: center">
+<button class="btn" th:onclick="window.location.href='index'">回到首页</button>
+</div>
 <hr />
 <br />
 <br />
@@ -31,13 +34,13 @@
         <div><span>邮箱</span><input type="text" th:field="${customer.email}" />  </div>
         <div><span>地区</span><input type="text" th:field="${customer.district}" />  </div>
         <div><span>合作状态</span><input type="text" th:field="${customer.cooperationStatus}" />  </div>
-        <input type="hidden" th:field="${customer.id}" />
+        <input type="hidden" th:field="${customer.customerId}" />
         <input type="submit" value="修改客户信息" />
 </form>
 </div>
-
-<button style="text-align: center" class="btn" th:onclick="window.location.href='deleteCurrentCustomer?Id='+[[${customer.Id}]]">删除该用户</button>
-
+<div class='text1' style="text-align: center">
+<button class="btn" th:onclick="window.location.href='deleteCurrentCustomer?customerId='+[[${customer.customerId}]]">删除该用户</button>
+</div>
 
 </body>
 </html>

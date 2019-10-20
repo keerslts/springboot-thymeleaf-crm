@@ -4,23 +4,66 @@
 
 
     <resultMap id="orderCustomerBaseResultMap" type="com.angus.dao.pojo.OrderCustomer">
-        <id column="id" property="id" />
-        <result column="orderNumber" property="orderNumber" />
-        <result column="orderName"  property="orderName" />
-        <result column="orderDate"  property="orderDate" />
-        <result column="serviceProject"  property="serviceProject" />
-        <result column="charge"  property="charge" />
-        <result column="moneySituation"  property="moneySituation" />
-        <result column="serviceStatus"  property="serviceStatus" />
-        <result column="name"  property="name" />
-        <result column="linkMan"  property="linkMan" />
-        <result column="email"  property="email" />
+        <id column="id" property="id"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="orderName" property="orderName"/>
+        <result column="orderDate" property="orderDate"/>
+        <result column="serviceProject" property="serviceProject"/>
+        <result column="charge" property="charge"/>
+        <result column="moneySituation" property="moneySituation"/>
+        <result column="serviceStatus" property="serviceStatus"/>
+        <result column="name" property="name"/>
+        <result column="linkMan" property="linkMan"/>
+        <result column="email" property="email"/>
     </resultMap>
 
     <!--    获取所有用户  -->
     <select id="getAllOrderCustomers" resultType="java.util.Map">
-        SELECT * FROM `order` o1 left join res_orderCustomer r1 on o1.Id=r1.orderId LEFT JOIN customer c1 ON
-        r1.customerId=c1.Id
+        <!--        SELECT * FROM `order` o1 left join res_orderCustomer r1 on o1.orderId=r1.orderId LEFT JOIN customer c1 ON-->
+        <!--        r1.customerId=c1.customerId-->
+        SELECT
+        ifnull(orderNumber, '') orderNumber,
+        ifnull(charge, '') charge,
+        ifnull(business, '') business,
+        ifnull(o1.orderId, '') orderId,
+        ifnull(cooperationStatus, '') cooperationStatus,
+        ifnull(moneySituation, '') moneySituation,
+        ifnull(serviceProject, '') serviceProject,
+        ifnull(linkMan, '') linkMan,
+        ifnull(phoneNumber, '') phoneNumber,
+        ifnull(serviceStatus, '') serviceStatus,
+        ifnull(district, '') district,
+        ifnull(c1.customerId, '') customerId,
+        ifnull(`name`, '') name,
+        ifnull(r1.Id, '') Id,
+        ifnull(orderDate, '') orderDate,
+        ifnull(email, '') email
+        FROM
+        `order` o1
+        LEFT JOIN res_orderCustomer r1 ON o1.orderId = r1.orderId
+        LEFT JOIN customer c1 ON r1.customerId = c1.customerId
+    </select>
+    <!--    获取所有用户  -->
+    <select id="getOrderCustomerById" resultType="java.util.Map">
+        SELECT * FROM `order` o1 left join res_orderCustomer r1 on o1.orderId=r1.orderId LEFT JOIN customer c1 ON
+        r1.customerId=c1.customerId where r1.id=#{Id}
+    </select>
+    <!--   变更order和customer的关系  -->
+    <select id="updateRelatedCustomer">
+        UPDATE res_orderCustomer set
+        customerId=#{customerId} where Id=#{Id}
+    </select>
+    <!--   插入order和customer的关系  -->
+    <select id="insertRelatedCustomer">
+        INSERT INTO res_orderCustomer(orderId,customerId) VALUES(#{orderId},#{customerId})
+    </select>
+
+    <select id="getResOrderCustomer" resultType="java.lang.Integer">
+        select id from res_orderCustomer where customerId=#{customerId} and orderId=#{orderId}
+    </select>
+
+    <select id="deleteResOrderCustomerByOrderId">
+        delete from res_orderCustomer where orderId=#{orderId};
     </select>
 
 

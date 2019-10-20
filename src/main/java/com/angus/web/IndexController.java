@@ -39,7 +39,7 @@ public class IndexController {
      * @return
      */
     @RequestMapping("/login")
-    public String showLogin(HttpServletRequest request, User user) {
+    public String showLogin(HttpServletRequest request,@ModelAttribute("user") User user) {
 
         return LOGIN;
     }
@@ -83,7 +83,7 @@ public class IndexController {
     }
 
     @RequestMapping("/index")
-    public String getIndex(HttpServletRequest request) {
+    public String getIndex(HttpServletRequest request,@ModelAttribute("user") User user) {
         if(!userSessionCheck(request)){
             //如果session信息中没有用户信息
             return LOGIN;

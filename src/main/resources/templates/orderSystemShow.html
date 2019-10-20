@@ -13,13 +13,15 @@
 <h1 style="text-align: center;width:100%;">订单信息管理系统</h1>
 <br />
 <br />
+<div class='text1' style="text-align: center">
+<button class="btn" th:onclick="window.location.href='index'">回到首页</button>
+</div>
 <hr />
 <br />
 <br />
 <br />
-<table style="text-align: center" border="3">
+<table style="text-align: center;margin: auto" border="3">
 <tr>
-    <td>ID</td>
     <td>订单编号</td>
     <td>下单日期</td>
     <td>客户名称</td>
@@ -34,25 +36,25 @@
 
     <tr th:each="orderCustomer:${orderCustomerList}">
 <!--        <input type="hidden" th:field="${customer.id}" />-->
-        <td type="hidden" th:text="${orderCustomer.orderDate}"></td>
-        <td th:text="${orderCustomer.orderId}"></td>
-        <td th:text="${orderCustomer.orderNumber}"></td>
-        <td th:text="${orderCustomer.orderDate}"></td>
-        <td th:text="${orderCustomer.name}"></td>
-        <td th:text="${orderCustomer.linkMan}"></td>
-        <td th:text="${orderCustomer.email}"></td>
-        <td th:text="${orderCustomer.serviceProject}"></td>
-        <td th:text="${orderCustomer.charge}"></td>
-        <td th:text="${orderCustomer.moneySituation}"></td>
-        <td th:text="${orderCustomer.serviceStatus}"></td>
+        <td th:text="${orderCustomer.get('orderNumber')}"></td>
+        <td th:text="${orderCustomer.get('orderDate')}"></td>
+        <td th:text="${orderCustomer.get('name')}"></td>
+        <td th:text="${orderCustomer.get('linkMan')}"></td>
+        <td th:text="${orderCustomer.get('email')}"></td>
+        <td th:text="${orderCustomer.get('serviceProject')}"></td>
+        <td th:text="${orderCustomer.get('charge')}"></td>
+        <td th:text="${orderCustomer.get('moneySituation')}"></td>
+        <td th:text="${orderCustomer.get('serviceStatus')}"></td>
         <td>
-            <button class="btn" th:onclick="window.location.href='editCustomerInfo?Id='+[[${orderCustomer.Id}]]">修改该客户信息</button>
+<!--            <button class="btn" th:onclick="window.location.href='editOrderInfo'">修改该客户信息</button>-->
+<!--            <button class="btn" th:onclick="window.location.href='editOrderInfo?Id='+[[${orderCustomer.get('Id')}]]">修改该客户信息</button>-->
+            <button class="btn" th:onclick="window.location.href='editOrderInfo?Id='+[[${orderCustomer.get('Id')}]] +'&order.orderId='+[[${orderCustomer.get('orderId')}]]">修改该客户信息</button>
         </td>
     </tr>
 </table>
-
-<button class="btn" style="text-align: center" th:onclick="window.location.href='addNewCustomerShow'">新增用户</button>
-
+<div class='text1' style="text-align: center">
+<button class="btn" th:onclick="window.location.href='addNewOrderShow'">新增订单</button>
+</div>
 
 
 </body>

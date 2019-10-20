@@ -4,14 +4,14 @@
 
 
     <resultMap id="orderBaseResultMap" type="com.angus.dao.pojo.Order">
-        <id column="id" property="id" />
-        <result column="orderNumber" property="orderNumber" />
-        <result column="orderName"  property="orderName" />
-        <result column="orderDate"  property="orderDate" />
-        <result column="serviceProject"  property="serviceProject" />
-        <result column="charge"  property="charge" />
-        <result column="moneySituation"  property="moneySituation" />
-        <result column="serviceStatus"  property="serviceStatus" />
+        <id column="orderId" property="orderId"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="orderName" property="orderName"/>
+        <result column="orderDate" property="orderDate"/>
+        <result column="serviceProject" property="serviceProject"/>
+        <result column="charge" property="charge"/>
+        <result column="moneySituation" property="moneySituation"/>
+        <result column="serviceStatus" property="serviceStatus"/>
     </resultMap>
 
     <!--    获取所有用户  -->
@@ -20,24 +20,26 @@
     </select>
     <!--    获取所有用户  -->
     <select id="addNewOrder" resultMap="orderBaseResultMap">
-        INSERT INTO order VALUES(#{Id},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus})
+        INSERT INTO `order`
+        VALUES(#{orderId},#{orderNumber},#{orderDate},#{serviceProject},#{charge},#{moneySituation},#{serviceStatus},#{orderName})
     </select>
 
     <!--    根据id查询用户信息    -->
     <select id="getOrderById" resultMap="orderBaseResultMap">
-        SELECT * FROM order where Id=#{Id}
+        SELECT * FROM `order` where orderId=#{orderId}
     </select>
 
     <!--    根据id删除用户信息    -->
-    <select id="deleteOrderById" >
-        delete from order where Id=#{Id}
+    <select id="deleteOrderById">
+        delete from `order` where orderId=#{orderId};
     </select>
 
     <!--    根据id更新用户信息    -->
-    <update id="updateOrder" >
-        UPDATE order set
-        name=#{name},business=#{business},linkMan=#{linkMan},phoneNumber=#{phoneNumber},email=#{email},district=#{district},cooperationStatus=#{cooperationStatus}
-        where Id=#{Id}
+    <update id="updateOrder">
+        UPDATE `order` set
+        orderName=#{orderName},orderNumber=#{orderNumber},orderDate=#{orderDate},serviceProject=#{serviceProject},
+        charge=#{charge},moneySituation=#{moneySituation},serviceStatus=#{serviceStatus}
+        where orderId=#{orderId}
     </update>
 
 </mapper>

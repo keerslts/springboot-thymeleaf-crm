@@ -2,7 +2,7 @@ package com.angus.dao.pojo;
 
 public class Customer {
 
-    private Integer Id;
+    private Integer customerId;
 
     private String name;
 
@@ -20,12 +20,12 @@ public class Customer {
     //合作情况
     private String cooperationStatus;
 
-    public Integer getId() {
-        return Id;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setId(Integer id) {
-        Id = id;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getName() {

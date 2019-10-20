@@ -10,14 +10,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class CustomerSystemController
-{
+public class CustomerSystemController {
 
     private static final String INDEX = "index";
     private static final String LOGIN = "login";
@@ -35,6 +35,7 @@ public class CustomerSystemController
 
     /**
      * 展示登陆界面
+     *
      * @return
      */
     @RequestMapping("/customerSystemShow")
@@ -69,8 +70,8 @@ public class CustomerSystemController
     public String editCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
 
 
-        Customer currentCustomer = customerService.getCustomerById(customer.getId());
-        customer.setId(currentCustomer.getId());
+        Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
+        customer.setCustomerId(currentCustomer.getCustomerId());
         customer.setBusiness(currentCustomer.getBusiness());
         customer.setCooperationStatus(currentCustomer.getCooperationStatus());
         customer.setDistrict(currentCustomer.getDistrict());
@@ -93,16 +94,17 @@ public class CustomerSystemController
     @RequestMapping("/deleteCurrentCustomer")
     public String deleteCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
 
-        customerService.deleteCustomerById(customer.getId());
+        customerService.deleteCustomerById(customer.getCustomerId());
         getAllCustomers(map);
         return CUSTOMER_SYSTEM_SHOW;
     }
 
     @RequestMapping("/addRelatedCustomer")
     public String addRelatedCustomer(HttpServletRequest request, @ModelAttribute("orderCustomer")
-                    OrderCustomer orderCustomer, ModelMap map) {
+            OrderCustomer orderCustomer, ModelMap map) {
 
         getAllCustomers(map);
+        map.put("orderCustomerId", orderCustomer.getId());
         return CHOOSE_ONE_CUSTOMER;
     }
 }

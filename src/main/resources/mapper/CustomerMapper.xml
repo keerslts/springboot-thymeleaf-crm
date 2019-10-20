@@ -20,24 +20,24 @@
     </select>
     <!--    获取所有用户  -->
     <select id="addNewCustomer" resultMap="baseResultMap">
-        INSERT INTO customer VALUES(#{Id},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus})
+        INSERT INTO customer VALUES(#{customerId},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus})
     </select>
 
     <!--    根据id查询用户信息    -->
     <select id="getCustomerById" resultMap="baseResultMap">
-        SELECT * FROM customer where Id=#{Id}
+        SELECT * FROM customer where customerId=#{Id}
     </select>
 
     <!--    根据id删除用户信息    -->
     <select id="deleteCustomerById" >
-        delete from customer where Id=#{Id}
+        delete from customer where customerId=#{customerId}
     </select>
 
     <!--    根据id更新用户信息    -->
     <update id="updateCustomer" >
         UPDATE customer set
         name=#{name},business=#{business},linkMan=#{linkMan},phoneNumber=#{phoneNumber},email=#{email},district=#{district},cooperationStatus=#{cooperationStatus}
-        where Id=#{Id}
+        where customerId=#{customerId}
     </update>
 
 </mapper>

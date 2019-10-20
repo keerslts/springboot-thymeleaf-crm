@@ -13,11 +13,14 @@
 <h1 style="text-align: center;width:100%;">客户信息管理系统</h1>
 <br />
 <br />
+<div class='text1' style="text-align: center">
+<button class="btn" th:onclick="window.location.href='index'">回到首页</button>
+</div>
 <hr />
 <br />
 <br />
 <br />
-<table style="text-align: center" border="3">
+<table style="text-align: center;margin: auto" border="3">
 <tr>
     <td>ID</td>
     <td>行业</td>
@@ -33,7 +36,7 @@
 
     <tr th:each="customer:${customerList}">
 <!--        <input type="hidden" th:field="${customer.id}" />-->
-        <td type="hidden" th:text="${customer.id}"></td>
+        <td type="hidden" th:text="${customer.customerId}"></td>
         <td th:text="${customer.business}"></td>
         <td th:text="${customer.name}"></td>
         <td th:text="${customer.linkMan}"></td>
@@ -42,13 +45,13 @@
         <td th:text="${customer.district}"></td>
         <td th:text="${customer.cooperationStatus}"></td>
         <td>
-            <button class="btn" th:onclick="window.location.href='editCustomerInfo?Id='+[[${customer.Id}]]">修改该客户信息</button>
+            <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">修改该客户信息</button>
         </td>
     </tr>
 </table>
-
-<button class="btn" style="text-align: center" th:onclick="window.location.href='addNewCustomerShow'">新增用户</button>
-
+<div class='text1' style="text-align: center">
+<button class="btn" th:onclick="window.location.href='addNewCustomerShow'">新增用户</button>
+</div>
 
 
 </body>
