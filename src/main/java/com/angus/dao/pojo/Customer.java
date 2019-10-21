@@ -6,6 +6,7 @@ public class Customer {
 
     private String name;
 
+    //行业
     private String business;
 
     private String linkMan;
@@ -17,8 +18,20 @@ public class Customer {
     //地区
     private String district;
 
-    //合作情况
+    //合作状态
     private String cooperationStatus;
+
+    //客户归属
+    private String customerBelong;
+
+    //客户类型
+    private String customerType;
+
+    //业务类型
+    private String serviceType;
+
+    //跟进记录
+    private String followRecord;
 
     public Integer getCustomerId() {
         return customerId;
@@ -82,5 +95,37 @@ public class Customer {
 
     public void setCooperationStatus(String cooperationStatus) {
         this.cooperationStatus = cooperationStatus;
+    }
+
+    public String getCustomerBelong() {
+        return customerBelong;
+    }
+
+    public void setCustomerBelong(String customerBelong) {
+        this.customerBelong = customerBelong;
+    }
+
+    public String getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(String customerType) {
+        this.customerType = customerType;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getFollowRecord() {
+        return followRecord;
+    }
+
+    public void setFollowRecord(String followRecord) {
+        this.followRecord = followRecord;
     }
 }

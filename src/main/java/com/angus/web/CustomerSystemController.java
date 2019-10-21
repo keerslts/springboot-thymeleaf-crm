@@ -3,6 +3,7 @@ package com.angus.web;
 import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.OrderCustomer;
 import com.angus.service.CustomerService;
+import com.angus.util.ThymeleafUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +26,7 @@ public class CustomerSystemController {
     private static final String ADD_NEW_CUSTOMER = "addNewCustomer";
     private static final String CUSTOMER_SYSTEM_SHOW = "customerSystemShow";
     private static final String EDIT_CUSTOMER_INFO = "editCustomerInfo";
+    private static final String VIEW_CUSTOMER_INFO = "viewCustomerInfo";
     private static final String CHOOSE_ONE_CUSTOMER = "chooseOneCustomer";
 
     @Autowired
@@ -53,13 +55,23 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/addNewCustomerShow")
-    private String addNewCustomerShow(Customer customer) {
+    private String addNewCustomerShow(@ModelAttribute("customer") Customer customer,
+                                      @ModelAttribute("serviceTypeList") ArrayList<String> serviceTypeList) {
+
+        customer.setServiceType("123456");
+        serviceTypeList.add("2");
+        serviceTypeList.add("5");
+        serviceTypeList.add("57");
+
+        String a = "123";
+
+        a.contains("33");
 
         return ADD_NEW_CUSTOMER;
     }
 
     @RequestMapping("/addNewCustomer")
-    public String addNewCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String addNewCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map, @ModelAttribute("serviceTypeList") ArrayList<String> serviceTypeList) {
 
         customerService.addNewCustomer(customer);
         getAllCustomers(map);
@@ -81,6 +93,23 @@ public class CustomerSystemController {
         customer.setPhoneNumber(currentCustomer.getPhoneNumber());
 
         return EDIT_CUSTOMER_INFO;
+    }
+
+    @RequestMapping("/viewCustomerInfo")
+    public String viewCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
+
+
+        Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
+        customer.setCustomerId(currentCustomer.getCustomerId());
+        customer.setBusiness(currentCustomer.getBusiness());
+        customer.setCooperationStatus(currentCustomer.getCooperationStatus());
+        customer.setDistrict(currentCustomer.getDistrict());
+        customer.setEmail(currentCustomer.getEmail());
+        customer.setLinkMan(currentCustomer.getLinkMan());
+        customer.setName(currentCustomer.getName());
+        customer.setPhoneNumber(currentCustomer.getPhoneNumber());
+
+        return VIEW_CUSTOMER_INFO;
     }
 
     @RequestMapping("/updateCustomer")
