@@ -27,12 +27,31 @@
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
     <form action="#" th:action="@{/addNewCustomer}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
         <div><span>行业</span><input type="text" th:field="*{business}" /> </div>
+        <div><span>地区</span><input type="text" th:field="*{district}" />  </div>
         <div><span>名称</span><input type="text" th:field="*{name}"/>  </div>
         <div><span>联系人</span><input type="text" th:field="*{linkMan}" />  </div>
         <div><span>手机</span><input type="text" th:field="*{phoneNumber}" />  </div>
         <div><span>邮箱</span><input type="text" th:field="*{email}" />  </div>
-        <div><span>地区</span><input type="text" th:field="*{district}" />  </div>
-        <div><span>合作情况</span><input type="text" th:field="*{cooperationStatus}" />  </div>
+<!--        <div><span>合作类型</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
+        <div>
+            <span>合作类型</span>
+        <select name="">
+            <option value="成分分析">成分分析</option>
+            <option value="理化指标">理化指标</option>
+            <option value="仪器检测">仪器检测</option>
+            <option value="标准检测">标准检测</option>
+            <option value="外包项目">外包项目</option>
+            <option value="其他业务">其他业务</option>
+        </select>
+        </div>
+<!--        <div><span>合作状态</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
+<!--        <div><span>该客户全部订单</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
+<!--        <div><span>客户类型</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
+<!--        <div><span>客户归属</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
+
+
+
+        <!--        <div><span>合作情况</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
 
         <input type="submit" value="添加新客户" />
 </form>
