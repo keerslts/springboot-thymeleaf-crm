@@ -1,5 +1,7 @@
 package com.angus.dao.pojo;
 
+import java.util.List;
+
 public class Customer {
 
     private Integer customerId;
@@ -28,7 +30,7 @@ public class Customer {
     private String customerType;
 
     //业务类型
-    private String serviceType;
+    private List<String> serviceType;
 
     //跟进记录
     private String followRecord;
@@ -113,19 +115,21 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-
     public String getFollowRecord() {
         return followRecord;
     }
 
     public void setFollowRecord(String followRecord) {
         this.followRecord = followRecord;
+    }
+
+    public List<String> getServiceType ()
+    {
+        return serviceType;
+    }
+
+    public void setServiceType (List<String> serviceType)
+    {
+        this.serviceType = serviceType;
     }
 }

@@ -3,6 +3,7 @@ package com.angus.web;
 import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.OrderCustomer;
 import com.angus.service.CustomerService;
+import com.angus.util.PageListMapUtil;
 import com.angus.util.ThymeleafUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,16 +57,20 @@ public class CustomerSystemController {
 
     @RequestMapping("/addNewCustomerShow")
     private String addNewCustomerShow(@ModelAttribute("customer") Customer customer,
-                                      @ModelAttribute("serviceTypeList") ArrayList<String> serviceTypeList) {
+                                      @ModelAttribute("pageListMapUtil")
+                                                      PageListMapUtil pageListMapUtil) {
 
-        customer.setServiceType("123456");
-        serviceTypeList.add("2");
-        serviceTypeList.add("5");
-        serviceTypeList.add("57");
+        List a = new ArrayList();
+        a.add("2");
+        a.add("5");
+        customer.setServiceType(a);
+        customer.setBusiness("建筑助剂");
+        customer.setCustomerBelong("xxx");
 
-        String a = "123";
+//        serviceTypeList.add("2");
+//        serviceTypeList.add("5");
+//        serviceTypeList.add("57");
 
-        a.contains("33");
 
         return ADD_NEW_CUSTOMER;
     }

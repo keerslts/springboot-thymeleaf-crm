@@ -25,7 +25,7 @@
 <br />
 <div class='text1' style="text-align: center">
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
-    <form action="#" th:action="@{/addNewCustomer}" th:object="${serviceTypeList}" method="post" onSubmit="return checkUpdateUser()">
+    <form action="#" th:action="@{/addNewCustomer}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
         <div><span>名称</span><input type="text" th:field="*{name}"/>  </div>
         <div><span>联系人</span><input type="text" th:field="*{linkMan}" />  </div>
         <div><span>手机</span><input type="text" th:field="*{phoneNumber}" />  </div>
@@ -34,12 +34,19 @@
         <div>
             <span>客户归属</span>
             <select th:field="*{customerBelong}">
-                <option value="丁庆超">丁庆超</option>
-                <option value="周金铃">周金铃</option>
-                <option value="xxx">xxx</option>
-                <option value="公司客户维护组1">公司客户维护组1</option>
-                <option value="公司客户维护组2">公司客户维护组2</option>
+            <option th:each="obj:${pageListMapUtil.customerBelongList}"
+                    th:selected="${customerBelong eq obj}"
+                    th:value="${obj}"
+                    th:text="${obj}" >
+            </option>
             </select>
+<!--            -->
+<!--                <option value="丁庆超">丁庆超</option>-->
+<!--                <option value="周金铃">周金铃</option>-->
+<!--                <option value="xxx">xxx</option>-->
+<!--                <option value="公司客户维护组1">公司客户维护组1</option>-->
+<!--                <option value="公司客户维护组2">公司客户维护组2</option>-->
+<!--            </select>-->
         </div>
 
         <div>
@@ -86,14 +93,13 @@
 <!--            <label  th:each="data : ${list}">-->
 <!--                <input th:attr="checked=${methodService.contains(data.id,proofsList)?true:false}" type="checkbox" name="proofs[]"  th:value="${data.id}" id="inlineCheckbox1" />-->
 <!--            </label>-->
-
-            <input type ="checkbox"
-                   th:field="*{serviceType}"
-                   th:each ="obj : ${serviceTypeList}"
+            <checkBox>
+            <input type ="checkbox" th:field="*{serviceType}"
+                   th:each ="obj : ${pageListMapUtil.serviceTypeList}"
                    th:value="${obj}"
                    th:text ="${obj}"
-                   th:checked="true"
                    >
+            </checkBox>
 <!--                   th:checked=true>-->
 
 <!--            <input type ="checkbox" name="required" th:field="*{serviceType}"-->
