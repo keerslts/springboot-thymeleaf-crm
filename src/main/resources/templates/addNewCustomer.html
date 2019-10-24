@@ -40,89 +40,49 @@
                     th:text="${obj}" >
             </option>
             </select>
-<!--            -->
-<!--                <option value="丁庆超">丁庆超</option>-->
-<!--                <option value="周金铃">周金铃</option>-->
-<!--                <option value="xxx">xxx</option>-->
-<!--                <option value="公司客户维护组1">公司客户维护组1</option>-->
-<!--                <option value="公司客户维护组2">公司客户维护组2</option>-->
-<!--            </select>-->
         </div>
 
         <div>
             <span>客户类型</span>
             <select th:field="*{customerType}">
-                <option value="主动开发">主动开发</option>
-                <option value="被动信息">被动信息</option>
-                <option value="公司分配">公司分配</option>
+                <option th:each="obj:${pageListMapUtil.customerTypeList}"
+                        th:selected="${customerType eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
             </select>
         </div>
         <div>
             <span>合作状态</span>
             <select th:field="*{cooperationStatus}">
-                <option value="未合作">未合作</option>
-                <option value="潜在客户">潜在客户</option>
-                <option value="重要潜在客户">重要潜在客户</option>
-                <option value="合作客户">合作客户</option>
-                <option value="VIP客户">VIP客户</option>
-                <option value="流失客户">流失客户</option>
-                <option value="黑名单客户">黑名单客户</option>
-            </select>
-        </div>
-        <div>
-            <span>行业</span>
-            <select th:value="${customer.business}" name="123">
-<!--                <select>-->
-                <option value="日化清洗">日化清洗</option>
-                <option value="建筑助剂" th:selected=true>建筑助剂</option>
-                <option value="油墨涂料">油墨涂料</option>
-                <option value="胶黏剂/树脂乳液">胶黏剂/树脂乳液</option>
-                <option value="表面处理">表面处理</option>
-                <option value="高分子材料">高分子材料</option>
-                <option value="原料贸易">原料贸易</option>
-                <option value="医药">医药</option>
-                <option value="设备">设备</option>
-                <option value="其他">其他</option>
+                <option th:each="obj:${pageListMapUtil.cooperationStatusList}"
+                        th:selected="${cooperationStatus eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
             </select>
         </div>
 
-<!--        <div><span>地区</span><input type="text" th:field="*{district}" />  </div>-->
-<!--        <div><span>合作类型</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
+        <div>
+            <span>行业</span>
+            <select th:field="*{business}">
+                <option th:each="obj:${pageListMapUtil.businessList}"
+                        th:selected="${business eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >行业
+                </option>
+            </select>
+        </div>
+
         <div>
             <span>业务类型</span>
-<!--            <label  th:each="data : ${list}">-->
-<!--                <input th:attr="checked=${methodService.contains(data.id,proofsList)?true:false}" type="checkbox" name="proofs[]"  th:value="${data.id}" id="inlineCheckbox1" />-->
-<!--            </label>-->
-            <checkBox>
             <input type ="checkbox" th:field="*{serviceType}"
                    th:each ="obj : ${pageListMapUtil.serviceTypeList}"
                    th:value="${obj}"
                    th:text ="${obj}"
-                   >
-            </checkBox>
-<!--                   th:checked=true>-->
-
-<!--            <input type ="checkbox" name="required" th:field="*{serviceType}"-->
-<!--                   th:each ="map : ${requiredMap}"-->
-<!--                   th:value="${map.value}"-->
-<!--                   th:text ="${map.key}"-->
-<!--                   th:attr ="checked=${map.value eq required ? true : false}">-->
+                   th:attr ="checked=${serviceType eq obj ? true : false}">
         </div>
 
-
-
-<!--        <select name="">-->
-<!--            <option value="成分分析">成分分析</option>-->
-<!--            <option value="理化指标">理化指标</option>-->
-<!--            <option value="仪器检测">仪器检测</option>-->
-<!--            <option value="标准检测">标准检测</option>-->
-<!--            <option value="外包项目">外包项目</option>-->
-<!--            <option value="其他业务">其他业务</option>-->
-<!--        </select>-->
-<!--        <div><span>合作状态</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
-<!--        <div><span>该客户全部订单</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
-<!--        <div><span>客户类型</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
-<!--        <div><span>客户归属</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
 
 
 

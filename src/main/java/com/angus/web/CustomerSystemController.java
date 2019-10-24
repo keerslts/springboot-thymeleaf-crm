@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CustomerSystemController {
@@ -56,21 +58,56 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/addNewCustomerShow")
-    private String addNewCustomerShow(@ModelAttribute("customer") Customer customer,
+    private String addNewCustomerShow(@ModelAttribute("customer") Customer customer,@ModelAttribute("mapList") ArrayList<Map> mapList,
                                       @ModelAttribute("pageListMapUtil")
                                                       PageListMapUtil pageListMapUtil) {
 
-        List a = new ArrayList();
-        a.add("2");
-        a.add("5");
-        customer.setServiceType(a);
-        customer.setBusiness("建筑助剂");
-        customer.setCustomerBelong("xxx");
+//
+//        Map<String,String> b = new HashMap<>();
+//        b.put("1","a");
+//        b.put("2","b");
+//        mapList.add(b);
+//        List a = new ArrayList();
+//        a.add("2");
+//        a.add("5");
+//        customer.setServiceType(a);
+//        customer.setBusiness("建筑助剂");
+//        customer.setCustomerBelong("xxx");
 
-//        serviceTypeList.add("2");
-//        serviceTypeList.add("5");
-//        serviceTypeList.add("57");
+        return ADD_NEW_CUSTOMER;
+    }
 
+    @RequestMapping("/viewCustomerInfo")
+    private String viewCustomerInfo(@ModelAttribute("customer") Customer customer,@ModelAttribute("mapList") ArrayList<Map> mapList,
+                                      @ModelAttribute("pageListMapUtil")
+                                                      PageListMapUtil pageListMapUtil) {
+
+
+        Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
+        customer.setCustomerId(currentCustomer.getCustomerId());
+        customer.setBusiness(currentCustomer.getBusiness());
+        customer.setCooperationStatus(currentCustomer.getCooperationStatus());
+        customer.setDistrict(currentCustomer.getDistrict());
+        customer.setEmail(currentCustomer.getEmail());
+        customer.setLinkMan(currentCustomer.getLinkMan());
+        customer.setName(currentCustomer.getName());
+        customer.setPhoneNumber(currentCustomer.getPhoneNumber());
+        customer.setCustomerBelong(currentCustomer.getCustomerBelong());
+        customer.setCooperationStatus(currentCustomer.getCooperationStatus());
+        customer.setServiceType(currentCustomer.getServiceType());
+        customer.setCustomerType(currentCustomer.getCustomerType());
+        customer.setFollowRecord(currentCustomer.getFollowRecord());
+
+//        Map<String,String> b = new HashMap<>();
+//        b.put("1","a");
+//        b.put("2","b");
+//        mapList.add(b);
+//        List a = new ArrayList();
+//        a.add("2");
+//        a.add("5");
+//        customer.setServiceType(a);
+//        customer.setBusiness("建筑助剂");
+//        customer.setCustomerBelong("xxx");
 
         return ADD_NEW_CUSTOMER;
     }
