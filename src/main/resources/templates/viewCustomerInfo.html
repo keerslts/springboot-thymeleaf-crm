@@ -13,11 +13,11 @@
 <br />
 <h1 style="text-align: center;width:100%;">CRM管理系统</h1>
 <br />
-<h1 style="text-align: center;width:100%;">账号信息修改</h1>
+<h1 style="text-align: center;width:100%;">新增客户信息</h1>
 <br />
 <br />
 <div class='text1' style="text-align: center">
-<button class="btn" th:onclick="window.location.href='index'">回到首页</button>
+    <button class="btn" th:onclick="window.location.href='index'">回到首页</button>
 </div>
 <hr />
 <br />
@@ -25,22 +25,95 @@
 <br />
 <div class='text1' style="text-align: center">
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
-<!--    onSubmit="return checkUpdateUser()"-->
-    <form action="#" th:action="@{/updateCustomer}" th:object="${customer}" method="post" >
-        <div><span>行业</span><input type="text" th:field="${customer.business}" /> </div>
-        <div><span>名称</span><input type="text" th:field="${customer.name}"/>  </div>
-        <div><span>联系人</span><input type="text" th:field="${customer.linkMan}" />  </div>
-        <div><span>电话号码</span><input type="text" th:field="${customer.phoneNumber}" />  </div>
-        <div><span>邮箱</span><input type="text" th:field="${customer.email}" />  </div>
-        <div><span>地区</span><input type="text" th:field="${customer.district}" />  </div>
-        <div><span>合作状态</span><input type="text" th:field="${customer.cooperationStatus}" />  </div>
-        <input type="hidden" th:field="${customer.customerId}" />
-        <input type="submit" value="修改客户信息" />
-</form>
+    <form action="#" th:action="@{/}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
+        <div><span>名称</span><input type="text" th:field="*{name}"/>  </div>
+        <div><span>联系人</span><input type="text" th:field="*{linkMan}" />  </div>
+        <div><span>手机</span><input type="text" th:field="*{phoneNumber}" />  </div>
+        <div><span>邮箱</span><input type="text" th:field="*{email}" />  </div>
+
+        <div>
+            <span>客户归属</span>
+            <select th:field="*{customerBelong}">
+                <option th:each="obj:${pageListMapUtil.customerBelongList}"
+                        th:selected="${customerBelong eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <span>客户类型</span>
+            <select th:field="*{customerType}">
+                <option th:each="obj:${pageListMapUtil.customerTypeList}"
+                        th:selected="${customerType eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
+            </select>
+        </div>
+        <div>
+            <span>合作状态</span>
+            <select th:field="*{cooperationStatus}">
+                <option th:each="obj:${pageListMapUtil.cooperationStatusList}"
+                        th:selected="${cooperationStatus eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <span>行业</span>
+            <select th:field="*{business}">
+                <option th:each="obj:${pageListMapUtil.businessList}"
+                        th:selected="${business eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >行业
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <span>业务类型</span>
+            <label class="checkbox-inline i-checks"  th:each="obj : ${pageListMapUtil.serviceTypeList}">
+                <input th:attr="checked=${thymeleafUtil.stringContains(customer.serviceType,obj)?true:false}" type="checkbox" name="proofs[]"  th:value="${obj}" th:text ="${obj}" id="inlineCheckbox1" />
+            </label>
+        </div>
+
+    </form>
+
 </div>
+
 <div class='text1' style="text-align: center">
-<button class="btn" th:onclick="window.location.href='deleteCurrentCustomer?customerId='+[[${customer.customerId}]]">删除该用户</button>
+    <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">编辑该用户</button>
 </div>
+
+
+<br />
+<br />
+<br />
+<hr />
+<br />
+<br />
+<br />
+
+<div class='' style="text-align: center">
+    <button class="followRecordBtn" th:onclick="changeFollowRecordStatus()">激活跟进记录</button>
+</div>
+
+<div id="followRecordDiv" style="text-align: center; display: none">
+
+    <form action="#" th:action="@{/updateFollowRecord}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
+
+        <div><span>跟进记录</span><input type="text" th:field="*{followRecord}" />  </div>
+        <input type="hidden" th:field="*{customerId}"/>
+        <input type="submit" value="提交跟进记录" />
+
+    </form>
+
+</div>
+
 
 </body>
 </html>

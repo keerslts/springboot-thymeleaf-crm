@@ -26,6 +26,18 @@
           alert(wrongMessage);
     }
 
+    function changeFollowRecordStatus(){
+
+         var followRecordDiv=document.getElementById("followRecordDiv");
+         var style=followRecordDiv.style.display;
+
+         if(style=='none'){
+            followRecordDiv=document.getElementById("followRecordDiv").style.display='block';
+         }else{
+            followRecordDiv=document.getElementById("followRecordDiv").style.display='none';
+         }
+    }
+
         //jquery初始化
     $(function() {
         var wrongMessage = $('#wrongMessage').val();

@@ -80,7 +80,7 @@
                    th:each ="obj : ${pageListMapUtil.serviceTypeList}"
                    th:value="${obj}"
                    th:text ="${obj}"
-                   th:attr ="checked=${serviceType eq obj ? true : false}">
+                   th:attr ="checked=${serviceType contains obj ? true : false}">
         </div>
 
 

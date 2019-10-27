@@ -16,4 +16,6 @@ public interface CustomerService
     void updateCustomer(Customer customer);
 
     void deleteCustomerById(Integer id);
+
+    void updateFollowRecord(Customer customer);
 }

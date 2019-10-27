@@ -40,4 +40,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomerById(Integer id) {
         customerMapper.deleteCustomerById(id);
     }
+
+    @Override
+    public void updateFollowRecord(Customer customer) {
+        customerMapper.updateFollowRecord(customer);
+    }
 }

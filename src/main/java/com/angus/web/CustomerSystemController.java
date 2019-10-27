@@ -78,9 +78,8 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/viewCustomerInfo")
-    private String viewCustomerInfo(@ModelAttribute("customer") Customer customer,@ModelAttribute("mapList") ArrayList<Map> mapList,
-                                      @ModelAttribute("pageListMapUtil")
-                                                      PageListMapUtil pageListMapUtil) {
+    private String viewCustomerInfo(@ModelAttribute("customer") Customer customer,@ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
+                                      @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
 
 
         Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
@@ -98,18 +97,7 @@ public class CustomerSystemController {
         customer.setCustomerType(currentCustomer.getCustomerType());
         customer.setFollowRecord(currentCustomer.getFollowRecord());
 
-//        Map<String,String> b = new HashMap<>();
-//        b.put("1","a");
-//        b.put("2","b");
-//        mapList.add(b);
-//        List a = new ArrayList();
-//        a.add("2");
-//        a.add("5");
-//        customer.setServiceType(a);
-//        customer.setBusiness("建筑助剂");
-//        customer.setCustomerBelong("xxx");
-
-        return ADD_NEW_CUSTOMER;
+        return VIEW_CUSTOMER_INFO;
     }
 
     @RequestMapping("/addNewCustomer")
@@ -121,7 +109,9 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/editCustomerInfo")
-    public String editCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
+//    public String editCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
+    public String editCustomerInfo(@ModelAttribute("customer") Customer customer,@ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
+                                   @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil,@ModelAttribute("list") ArrayList list) {
 
 
         Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
@@ -133,31 +123,29 @@ public class CustomerSystemController {
         customer.setLinkMan(currentCustomer.getLinkMan());
         customer.setName(currentCustomer.getName());
         customer.setPhoneNumber(currentCustomer.getPhoneNumber());
+        customer.setCustomerBelong(currentCustomer.getCustomerBelong());
+        customer.setCooperationStatus(currentCustomer.getCooperationStatus());
+        customer.setServiceType(currentCustomer.getServiceType());
+        customer.setCustomerType(currentCustomer.getCustomerType());
+        customer.setFollowRecord(currentCustomer.getFollowRecord());
+
+        list.add("仪器检测");
+        list.add("工业诊断");
 
         return EDIT_CUSTOMER_INFO;
-    }
-
-    @RequestMapping("/viewCustomerInfo")
-    public String viewCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
-
-
-        Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
-        customer.setCustomerId(currentCustomer.getCustomerId());
-        customer.setBusiness(currentCustomer.getBusiness());
-        customer.setCooperationStatus(currentCustomer.getCooperationStatus());
-        customer.setDistrict(currentCustomer.getDistrict());
-        customer.setEmail(currentCustomer.getEmail());
-        customer.setLinkMan(currentCustomer.getLinkMan());
-        customer.setName(currentCustomer.getName());
-        customer.setPhoneNumber(currentCustomer.getPhoneNumber());
-
-        return VIEW_CUSTOMER_INFO;
     }
 
     @RequestMapping("/updateCustomer")
     public String updateCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
 
         customerService.updateCustomer(customer);
+        getAllCustomers(map);
+        return CUSTOMER_SYSTEM_SHOW;
+    }
+    @RequestMapping("/updateFollowRecord")
+    public String updateFollowRecord(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+
+        customerService.updateFollowRecord(customer);
         getAllCustomers(map);
         return CUSTOMER_SYSTEM_SHOW;
     }

@@ -16,4 +16,6 @@ public interface CustomerMapper
     void deleteCustomerById(Integer id);
 
     void updateCustomer(Customer customer);
+
+    void updateFollowRecord(Customer customer);
 }

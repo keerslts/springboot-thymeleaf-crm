@@ -30,7 +30,11 @@
     <td>邮箱</td>
     <td>地区</td>
     <td>合作情况</td>
-    <td>操作</td>
+    <td>客户归属</td>
+    <td>客户类型</td>
+    <td>业务类型</td>
+    <td>跟进记录</td>
+<!--    <td>操作</td>-->
     <td>操作</td>
 
 </tr>
@@ -45,9 +49,13 @@
         <td th:text="${customer.email}"></td>
         <td th:text="${customer.district}"></td>
         <td th:text="${customer.cooperationStatus}"></td>
-        <td>
-            <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">修改该客户信息</button>
-        </td>
+        <td th:text="${customer.customerBelong}"></td>
+        <td th:text="${customer.customerType}"></td>
+        <td th:text="${customer.serviceType}"></td>
+        <td th:text="${customer.followRecord}"></td>
+<!--        <td>-->
+<!--            <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">修改该客户信息</button>-->
+<!--        </td>-->
         <td>
             <button class="view" th:onclick="window.location.href='viewCustomerInfo?customerId='+[[${customer.customerId}]]">浏览该客户信息</button>
         </td>

@@ -12,6 +12,10 @@
         <result column="email"  property="email" />
         <result column="district"  property="district" />
         <result column="cooperationStatus"  property="cooperationStatus" />
+        <result column="customerBelong"  property="customerBelong" />
+        <result column="customerType"  property="customerType" />
+        <result column="serviceType"  property="serviceType" />
+        <result column="followRecord"  property="followRecord" />
     </resultMap>
 
     <!--    获取所有用户  -->
@@ -20,12 +24,12 @@
     </select>
     <!--    获取所有用户  -->
     <select id="addNewCustomer" resultMap="baseResultMap">
-        INSERT INTO customer VALUES(#{customerId},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus})
+        INSERT INTO customer VALUES(#{customerId},#{name},#{business},#{linkMan},#{phoneNumber},#{email},#{district},#{cooperationStatus},#{customerBelong},#{customerType},#{serviceType},#{followRecord})
     </select>
 
     <!--    根据id查询用户信息    -->
     <select id="getCustomerById" resultMap="baseResultMap">
-        SELECT * FROM customer where customerId=#{Id}
+        SELECT customerId,name,business,linkMan,phoneNumber,email,district,cooperationStatus,customerBelong,customerType,ifnull(serviceType,'') serviceType,followRecord FROM customer where customerId=#{Id}
     </select>
 
     <!--    根据id删除用户信息    -->
@@ -36,8 +40,15 @@
     <!--    根据id更新用户信息    -->
     <update id="updateCustomer" >
         UPDATE customer set
-        name=#{name},business=#{business},linkMan=#{linkMan},phoneNumber=#{phoneNumber},email=#{email},district=#{district},cooperationStatus=#{cooperationStatus}
+        name=#{name},business=#{business},linkMan=#{linkMan},phoneNumber=#{phoneNumber},email=#{email},district=#{district},cooperationStatus=#{cooperationStatus},
+        customerBelong=#{customerBelong},customerType=#{customerType},serviceType=#{serviceType},followRecord=#{followRecord}
         where customerId=#{customerId}
     </update>
+
+    <!--    根据id更新用户信息    -->
+    <update id="updateFollowRecord" >
+        UPDATE customer set followRecord=#{followRecord} where customerId=#{customerId}
+    </update>
+
 
 </mapper>
