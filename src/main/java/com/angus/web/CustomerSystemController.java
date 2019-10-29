@@ -58,9 +58,9 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/addNewCustomerShow")
-    private String addNewCustomerShow(@ModelAttribute("customer") Customer customer,@ModelAttribute("mapList") ArrayList<Map> mapList,
+    private String addNewCustomerShow(@ModelAttribute("customer") Customer customer, @ModelAttribute("mapList") ArrayList<Map> mapList,
                                       @ModelAttribute("pageListMapUtil")
-                                                      PageListMapUtil pageListMapUtil) {
+                                              PageListMapUtil pageListMapUtil) {
 
 //
 //        Map<String,String> b = new HashMap<>();
@@ -78,8 +78,8 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/viewCustomerInfo")
-    private String viewCustomerInfo(@ModelAttribute("customer") Customer customer,@ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
-                                      @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
+    private String viewCustomerInfo(@ModelAttribute("customer") Customer customer, @ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
+                                    @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
 
 
         Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
@@ -110,8 +110,8 @@ public class CustomerSystemController {
 
     @RequestMapping("/editCustomerInfo")
 //    public String editCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
-    public String editCustomerInfo(@ModelAttribute("customer") Customer customer,@ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
-                                   @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil,@ModelAttribute("list") ArrayList list) {
+    public String editCustomerInfo(@ModelAttribute("customer") Customer customer, @ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
+                                   @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
 
 
         Customer currentCustomer = customerService.getCustomerById(customer.getCustomerId());
@@ -129,9 +129,6 @@ public class CustomerSystemController {
         customer.setCustomerType(currentCustomer.getCustomerType());
         customer.setFollowRecord(currentCustomer.getFollowRecord());
 
-        list.add("仪器检测");
-        list.add("工业诊断");
-
         return EDIT_CUSTOMER_INFO;
     }
 
@@ -142,6 +139,7 @@ public class CustomerSystemController {
         getAllCustomers(map);
         return CUSTOMER_SYSTEM_SHOW;
     }
+
     @RequestMapping("/updateFollowRecord")
     public String updateFollowRecord(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
 

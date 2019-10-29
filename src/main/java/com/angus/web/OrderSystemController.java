@@ -4,6 +4,7 @@ import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.Order;
 import com.angus.dao.pojo.OrderCustomer;
 import com.angus.service.OrderService;
+import com.angus.util.PageListMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -56,7 +57,7 @@ public class OrderSystemController {
     }
 
     @RequestMapping("/addNewOrderShow")
-    private String addNewOrderShow(@ModelAttribute("orderCustomer") OrderCustomer orderCustomer) {
+    private String addNewOrderShow(@ModelAttribute("orderCustomer") OrderCustomer orderCustomer, @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
 
         return ADD_NEW_ORDER;
     }

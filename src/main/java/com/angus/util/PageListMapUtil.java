@@ -11,6 +11,11 @@ public final class PageListMapUtil extends HashMap
     public final static ArrayList<String> customerTypeList = new ArrayList<String>();
     public final static ArrayList<String> cooperationStatusList = new ArrayList<String>();
     public final static ArrayList<String> serviceTypeList = new ArrayList<String>();
+    public final static ArrayList<String> orderTypeList = new ArrayList<String>();
+    public final static ArrayList<String> orderServiceTypeList = new ArrayList<String>();
+    public final static ArrayList<String> receiveLabor = new ArrayList<String>();
+    public final static ArrayList<String> cheapCondition = new ArrayList<String>();
+    public final static ArrayList<String> projectProcess = new ArrayList<String>();
 
     static{
         //行业
@@ -58,6 +63,37 @@ public final class PageListMapUtil extends HashMap
         serviceTypeList.add("产品研发");
         serviceTypeList.add("工业诊断");
         serviceTypeList.add("其他业务");
+
+
+        //下单类型
+        orderTypeList.add("个人新客户");
+        orderTypeList.add("个人老客户");
+        orderTypeList.add("公司客户产生");
+
+
+        //订单业务类型
+        orderServiceTypeList.add("样品成分综合分析");
+        orderServiceTypeList.add("成分分析（按成分收费）");
+        orderServiceTypeList.add("仪器检测");
+        orderServiceTypeList.add("理化指标分析");
+        orderServiceTypeList.add("委外项目");
+        orderServiceTypeList.add("立项研发");
+
+        //承接实验室
+        receiveLabor.add("常州化学研究所");
+        receiveLabor.add("联泓（江苏）新材料研究院");
+        receiveLabor.add("委外实验室");
+
+        //优惠条件
+        cheapCondition.add("领导特批");
+        cheapCondition.add("协议价格");
+        cheapCondition.add("活动特惠");
+
+        //项目进展
+        projectProcess.add("暂停作业");
+        projectProcess.add("开始作业");
+        projectProcess.add("报告已出（未发）");
+        projectProcess.add("报告已发");
 
     }
 
