@@ -88,10 +88,11 @@
 <div class='text1' style="text-align: center">
     <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">编辑该用户</button>
 </div>
-
 <br />
-<br />
-
+<div class='text1' style="text-align: center">
+    <button class="btn" th:onclick="window.location.href='findOrdersByCustomerId?customer.customerId='+[[${customer.customerId}]]">查看该用户的所有订单</button>
+</div>
+<br/>
 <div class='text1' style="text-align: center">
     <button class="btn" th:onclick="window.location.href='addNewOrderShow?customer.customerId='+[[${customer.customerId}]]">为当前客户新增订单</button>
 </div>

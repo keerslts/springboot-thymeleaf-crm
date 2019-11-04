@@ -2,8 +2,8 @@ package com.angus.service;
 
 import com.angus.dao.pojo.Order;
 import com.angus.dao.pojo.OrderCustomer;
-import org.springframework.ui.ModelMap;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +31,8 @@ public interface OrderService
     Integer getResOrderCustomer(OrderCustomer orderCustomer);
 
     void deleteResOrderCustomerByOrderId(Integer orderId);
+
+    ArrayList<Integer> getLastOrderNumber();
+
+    int getOrderByEncode(String orderEncode);
 }

@@ -3,6 +3,7 @@ package com.angus.web;
 import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.Order;
 import com.angus.dao.pojo.OrderCustomer;
+import com.angus.service.CustomerService;
 import com.angus.service.OrderService;
 import com.angus.util.PageListMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class OrderSystemController {
     @Autowired
     private HttpSession httpSession;
 
+    @Autowired
+    private CustomerService customerService;
+
     /**
      * 展示登陆界面
      * 该方法中的user给前台返回
@@ -59,13 +63,62 @@ public class OrderSystemController {
     @RequestMapping("/addNewOrderShow")
     private String addNewOrderShow(@ModelAttribute("orderCustomer") OrderCustomer orderCustomer, @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
 
+        Customer customer = customerService.getCustomerById(orderCustomer.getCustomer().getCustomerId());
+        orderCustomer.setCustomer(customer);
+        Order order = new Order();
+        order.setOrderDate(new Date());
+        order.setOrderEncode(createOrderEncode(order));
+        orderCustomer.setOrder(order);
+
         return ADD_NEW_ORDER;
+    }
+
+    private String createOrderEncode(Order order) {
+
+        String encode = "ZKCH";
+
+        Date date = new Date();
+        String year = String.format("%tY", date);
+        encode = encode + year;
+        String month = String.format("%tm", date);
+        encode = encode + month + "1";
+        ArrayList<Integer> lastOrderNumber = orderService.getLastOrderNumber();
+        if (lastOrderNumber != null && lastOrderNumber.size() > 0) {
+            order.setOrderNumber(lastOrderNumber.get(lastOrderNumber.size() - 1) + 1);
+            encode = encode + formatOrderNumber(lastOrderNumber.get(lastOrderNumber.size() - 1));
+        } else {
+            order.setOrderNumber(1);
+            encode = encode + "0001";
+        }
+
+        return encode;
+    }
+
+    private String formatOrderNumber(Integer encode) {
+        encode = encode + 1;
+        int count = 0;
+        String tempString = "";
+        int tempEncode = encode;
+
+        while (encode / 10 > 0) {
+            encode = encode / 10;
+            count++;
+        }
+        for (int i = 3 - count; i > 0; i--) {
+            tempString = tempString + "0";
+        }
+
+        return tempString + tempEncode;
     }
 
     @RequestMapping("/addNewOrder")
     public String addNewOrder(HttpServletRequest request, @ModelAttribute("orderCustomer") OrderCustomer orderCustomer, ModelMap map) {
-
+        //毛利=“实际价格”—“常化所成本”—“联泓成本”，
+        orderCustomer.getOrder().setCalculateCharge(orderCustomer.getOrder().getRealCharge() - orderCustomer.getOrder().getCHCost() - orderCustomer.getOrder().getLHCost());
         orderService.addNewOrder(orderCustomer.getOrder());
+        int orderId = orderService.getOrderByEncode(orderCustomer.getOrder().getOrderEncode());
+        orderCustomer.getOrder().setOrderId(orderId);
+        orderService.insertRelatedCustomer(orderCustomer);
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
@@ -74,10 +127,10 @@ public class OrderSystemController {
     public String updateCurrentCustomer(HttpServletRequest request, @ModelAttribute("orderCustomer") OrderCustomer orderCustomer) {
 
 //        orderService.addNewOrder(order);
-        if (orderCustomer.getId()==0){
+        if (orderCustomer.getId() == 0) {
             orderService.insertRelatedCustomer(orderCustomer);
             orderCustomer.setId(orderService.getResOrderCustomer(orderCustomer));
-        }else{
+        } else {
             orderService.updateRelatedCustomer(orderCustomer);
         }
         editOrderInfo(request, orderCustomer);
@@ -112,11 +165,11 @@ public class OrderSystemController {
         orderCustomer.getCustomer().setDistrict((String) orderCustomerList.get(0).get("district"));
         orderCustomer.getCustomer().setCooperationStatus((String) orderCustomerList.get(0).get("cooperationStatus"));
         orderCustomer.getOrder().setOrderId((Integer) orderCustomerList.get(0).get("orderId"));
-        orderCustomer.getOrder().setServiceStatus((String) orderCustomerList.get(0).get("serviceStatus"));
-        orderCustomer.getOrder().setServiceProject((String) orderCustomerList.get(0).get("serviceProject"));
-        orderCustomer.getOrder().setOrderNumber((String) orderCustomerList.get(0).get("orderNumber"));
+//        orderCustomer.getOrder().setServiceStatus((String) orderCustomerList.get(0).get("serviceStatus"));
+//        orderCustomer.getOrder().setServiceProject((String) orderCustomerList.get(0).get("serviceProject"));
+//        orderCustomer.getOrder().setOrderNumber((String) orderCustomerList.get(0).get("orderNumber"));
         orderCustomer.getOrder().setOrderDate((Date) orderCustomerList.get(0).get("orderDate"));
-        orderCustomer.getOrder().setMoneySituation((String) orderCustomerList.get(0).get("moneySituation"));
+//        orderCustomer.getOrder().setMoneySituation((String) orderCustomerList.get(0).get("moneySituation"));
         orderCustomer.getOrder().setCharge((Integer) orderCustomerList.get(0).get("charge"));
         orderCustomer.getOrder().setOrderName((String) orderCustomerList.get(0).get("orderName"));
         return EDIT_ORDER_INFO;
@@ -138,4 +191,29 @@ public class OrderSystemController {
         getAllOrders(map);
         return ORDER_SYSTEM_SHOW;
     }
+
+    @RequestMapping("/editOrderCustomer")
+    public String editOrderCustomer(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
+
+
+        return ORDER_SYSTEM_SHOW;
+    }
+
+    @RequestMapping("/findOrdersByCustomerId")
+    public String findOrdersByCustomerId(HttpServletRequest request, @ModelAttribute("order") Order order, ModelMap map) {
+
+        getOrdersByCustomerId(map,order.getOrderId());
+        return ORDER_SYSTEM_SHOW;
+    }
+
+    private void getOrdersByCustomerId(ModelMap map, Integer orderId) {
+
+        List<Map> orderCustomerList = new ArrayList<Map>();
+//        orderList = orderService.getAllOrders();
+        orderCustomerList = orderService.getAllOrderCustomers();
+        map.put("orderCustomerList", orderCustomerList);
+
+    }
+
+
 }

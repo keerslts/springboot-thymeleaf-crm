@@ -21,12 +21,28 @@
     <!--    获取所有用户  -->
     <select id="addNewOrder" resultMap="orderBaseResultMap">
         INSERT INTO `order`
-        VALUES(#{orderId},#{orderNumber},#{orderDate},#{serviceProject},#{charge},#{moneySituation},#{serviceStatus},#{orderName})
+        (orderNumber,orderDate,charge,
+        orderName,orderEncode,orderType,serviceType,receiveLabor,
+        specialRequest,cheapCondition,realCharge,accountCharge,tailCharge,
+        CHCost,LHCost,WWCost,projectProcess,otherRemark,calculateCharge)
+        VALUES(#{orderNumber},#{orderDate},#{charge},
+        #{orderName},#{orderEncode},#{orderType},
+        #{serviceType},#{receiveLabor},#{specialRequest},#{cheapCondition},#{realCharge},
+        #{accountCharge},#{tailCharge},#{CHCost},#{LHCost},#{WWCost},
+        #{projectProcess},#{otherRemark},#{calculateCharge})
     </select>
 
     <!--    根据id查询用户信息    -->
     <select id="getOrderById" resultMap="orderBaseResultMap">
         SELECT * FROM `order` where orderId=#{orderId}
+    </select>
+
+    <select id="getLastOrderNumber" resultType="java.lang.Integer">
+        SELECT orderNumber FROM `order` order by orderNumber
+    </select>
+
+    <select id="getOrderByEncode" resultType="java.lang.Integer">
+        SELECT orderId FROM `order` where orderEncode=#{orderEncode}
     </select>
 
     <!--    根据id删除用户信息    -->

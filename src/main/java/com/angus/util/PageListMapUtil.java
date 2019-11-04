@@ -13,9 +13,10 @@ public final class PageListMapUtil extends HashMap
     public final static ArrayList<String> serviceTypeList = new ArrayList<String>();
     public final static ArrayList<String> orderTypeList = new ArrayList<String>();
     public final static ArrayList<String> orderServiceTypeList = new ArrayList<String>();
-    public final static ArrayList<String> receiveLabor = new ArrayList<String>();
-    public final static ArrayList<String> cheapCondition = new ArrayList<String>();
-    public final static ArrayList<String> projectProcess = new ArrayList<String>();
+    public final static ArrayList<String> receiveLaborList = new ArrayList<String>();
+    public final static ArrayList<String> cheapConditionList = new ArrayList<String>();
+    public final static ArrayList<String> projectProcessList = new ArrayList<String>();
+    public final static ArrayList<String> ticketStatusList = new ArrayList<String>();
 
     static{
         //行业
@@ -80,20 +81,25 @@ public final class PageListMapUtil extends HashMap
         orderServiceTypeList.add("立项研发");
 
         //承接实验室
-        receiveLabor.add("常州化学研究所");
-        receiveLabor.add("联泓（江苏）新材料研究院");
-        receiveLabor.add("委外实验室");
+        receiveLaborList.add("常州化学研究所");
+        receiveLaborList.add("联泓（江苏）新材料研究院");
+        receiveLaborList.add("委外实验室");
 
         //优惠条件
-        cheapCondition.add("领导特批");
-        cheapCondition.add("协议价格");
-        cheapCondition.add("活动特惠");
+        cheapConditionList.add("领导特批");
+        cheapConditionList.add("协议价格");
+        cheapConditionList.add("活动特惠");
 
         //项目进展
-        projectProcess.add("暂停作业");
-        projectProcess.add("开始作业");
-        projectProcess.add("报告已出（未发）");
-        projectProcess.add("报告已发");
+        projectProcessList.add("暂停作业");
+        projectProcessList.add("开始作业");
+        projectProcessList.add("报告已出（未发）");
+        projectProcessList.add("报告已发");
+
+        //发票状态
+        ticketStatusList.add("不需要");
+        ticketStatusList.add("未开");
+        ticketStatusList.add("已开");
 
     }
 

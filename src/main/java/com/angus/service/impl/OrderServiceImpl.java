@@ -7,8 +7,8 @@ import com.angus.dao.pojo.OrderCustomer;
 import com.angus.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +80,16 @@ public class OrderServiceImpl implements OrderService
     @Override
     public void deleteResOrderCustomerByOrderId(Integer orderId) {
         orderCustomerMapper.deleteResOrderCustomerByOrderId(orderId);
+    }
+
+    @Override
+    public ArrayList<Integer> getLastOrderNumber() {
+        return orderMapper.getLastOrderNumber();
+    }
+
+    @Override
+    public int getOrderByEncode(String orderEncode) {
+        return orderMapper.getOrderByEncode(orderEncode);
     }
 
 

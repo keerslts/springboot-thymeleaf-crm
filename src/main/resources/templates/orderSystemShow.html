@@ -5,6 +5,8 @@
     <title>crm 系统</title>
 </head>
 
+<script src="./js/editUserInfo.js"></script>
+
 <body>
 
 <br />
@@ -24,31 +26,51 @@
 <tr>
     <td>订单编号</td>
     <td>下单日期</td>
-    <td>客户名称</td>
-    <td>联系人</td>
-    <td>邮箱</td>
-    <td>服务项目</td>
-    <td>收费</td>
-    <td>到款情况</td>
-    <td>服务状态</td>
+    <td>客户</td>
+    <td>客户类型</td>
+    <td>销售负责</td>
+    <td>样品名称</td>
+    <td>测试项目</td>
+    <td>业务类型</td>
+    <td>承接实验室</td>
+    <td bgcolor=yellow>负责工程师</td>
+    <td bgcolor=yellow>项目进展</td>
+    <td>发票状态</td>
+    <td>实际价格</td>
+    <td>到账金额</td>
+    <td>尾款</td>
+    <td>联泓成本</td>
+    <td>常化所成本</td>
+    <td>委外成本</td>
+    <td>毛利</td>
 
 </tr>
-
     <tr th:each="orderCustomer:${orderCustomerList}">
 <!--        <input type="hidden" th:field="${customer.id}" />-->
-        <td th:text="${orderCustomer.get('orderNumber')}"></td>
+        <td th:text="${orderCustomer.get('orderEncode')}"></td>
         <td th:text="${orderCustomer.get('orderDate')}"></td>
-        <td th:text="${orderCustomer.get('name')}"></td>
-        <td th:text="${orderCustomer.get('linkMan')}"></td>
-        <td th:text="${orderCustomer.get('email')}"></td>
-        <td th:text="${orderCustomer.get('serviceProject')}"></td>
-        <td th:text="${orderCustomer.get('charge')}"></td>
-        <td th:text="${orderCustomer.get('moneySituation')}"></td>
-        <td th:text="${orderCustomer.get('serviceStatus')}"></td>
+        <td th:text="${orderCustomer.get('customerName')}"></td>
+        <td th:text="${orderCustomer.get('customerType')}"></td>
+        <td th:text="${orderCustomer.get('salePerson')}"></td>
+        <td th:text="${orderCustomer.get('exampleName')}"></td>
+        <td th:text="${orderCustomer.get('testProject')}"></td>
+        <td th:text="${orderCustomer.get('serviceType')}"></td>
+        <td th:text="${orderCustomer.get('receiveLabor')}"></td>
+        <td th:text="${orderCustomer.get('dutyProjector')}"></td>
+        <td th:text="${orderCustomer.get('projectProcess')}"></td>
+        <td th:text="${orderCustomer.get('ticketStatus')}"></td>
+        <td th:text="${orderCustomer.get('realCharge')}"></td>
+        <td th:text="${orderCustomer.get('accountCharge')}"></td>
+        <td th:text="${orderCustomer.get('tailCharge')}"></td>
+        <td th:text="${orderCustomer.get('LHCost')}"></td>
+        <td th:text="${orderCustomer.get('CHCost')}"></td>
+        <td th:text="${orderCustomer.get('WWCost')}"></td>
+        <td th:text="${orderCustomer.get('calculateCharge')}"></td>
         <td>
 <!--            <button class="btn" th:onclick="window.location.href='editOrderInfo'">修改该客户信息</button>-->
 <!--            <button class="btn" th:onclick="window.location.href='editOrderInfo?Id='+[[${orderCustomer.get('Id')}]]">修改该客户信息</button>-->
-            <button class="btn" th:onclick="window.location.href='editOrderInfo?Id='+[[${orderCustomer.get('Id')}]] +'&order.orderId='+[[${orderCustomer.get('orderId')}]]">修改该客户信息</button>
+            <button class="btn" th:onclick="window.location.href='editOrderCustomer?dutyProjector='+ [[${orderCustomer.get('projectProcess')}]]">修改该客户信息</button>
+<!--            <button class="btn" th:onclick="window.location.href='editOrderCustomer?order.dutyProjector='+[[${orderCustomer.get('dutyProjector')}]] +'&order.orderId='+[[${orderCustomer.get('orderId')}]]+'&order.projectProcess='+[[${orderCustomer.get('projectProcess')}]]">修改该客户信息</button>-->
         </td>
     </tr>
 </table>

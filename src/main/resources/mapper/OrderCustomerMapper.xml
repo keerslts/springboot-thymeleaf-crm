@@ -34,10 +34,31 @@
         ifnull(serviceStatus, '') serviceStatus,
         ifnull(district, '') district,
         ifnull(c1.customerId, '') customerId,
-        ifnull(`name`, '') name,
+        ifnull(`name`, '') customerName,
         ifnull(r1.Id, '') Id,
         ifnull(orderDate, '') orderDate,
-        ifnull(email, '') email
+        ifnull(email, '') email,
+        ifnull(orderName, '') orderName,
+        ifnull(orderEncode, '') orderEncode,
+        ifnull(orderType, '') orderType,
+        ifnull(o1.serviceType, '') serviceType,
+        ifnull(receiveLabor, '') receiveLabor,
+        ifnull(specialRequest, '') specialRequest,
+        ifnull(realCharge, '') realCharge,
+        ifnull(accountCharge, '') accountCharge,
+        ifnull(tailCharge, '') tailCharge,
+        ifnull(CHCost, '') CHCost,
+        ifnull(LHCost, '') LHCost,
+        ifnull(WWCost, '') WWCost,
+        ifnull(projectProcess, '') projectProcess,
+        ifnull(otherRemark, '') otherRemark,
+        ifnull(exampleName, '') exampleName,
+        ifnull(testProject, '') testProject,
+        ifnull(dutyProjector, '') dutyProjector,
+        ifnull(ticketStatus, '') ticketStatus,
+        ifnull(salePerson, '') salePerson,
+        ifnull(calculateCharge, '') calculateCharge
+
         FROM
         `order` o1
         LEFT JOIN res_orderCustomer r1 ON o1.orderId = r1.orderId
