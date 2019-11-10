@@ -26,14 +26,14 @@
 <div class='text1' style="text-align: center">
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
     <form action="#" th:action="@{/}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
-        <div><span>名称</span><input type="text" th:field="*{name}"/>  </div>
-        <div><span>联系人</span><input type="text" th:field="*{linkMan}" />  </div>
-        <div><span>手机</span><input type="text" th:field="*{phoneNumber}" />  </div>
-        <div><span>邮箱</span><input type="text" th:field="*{email}" />  </div>
+        <div><span>名称</span><input readonly="true" type="text" th:field="*{name}"/>  </div>
+        <div><span>联系人</span><input readonly="true" type="text" th:field="*{linkMan}" />  </div>
+        <div><span>手机</span><input readonly="true" type="text" th:field="*{phoneNumber}" />  </div>
+        <div><span>邮箱</span><input readonly="true" type="text" th:field="*{email}" />  </div>
 
         <div>
             <span>客户归属</span>
-            <select th:field="*{customerBelong}">
+            <select disabled="disabled" th:field="*{customerBelong}">
                 <option th:each="obj:${pageListMapUtil.customerBelongList}"
                         th:selected="${customerBelong eq obj}"
                         th:value="${obj}"
@@ -44,7 +44,7 @@
 
         <div>
             <span>客户类型</span>
-            <select th:field="*{customerType}">
+            <select disabled="disabled" th:field="*{customerType}">
                 <option th:each="obj:${pageListMapUtil.customerTypeList}"
                         th:selected="${customerType eq obj}"
                         th:value="${obj}"
@@ -54,7 +54,7 @@
         </div>
         <div>
             <span>合作状态</span>
-            <select th:field="*{cooperationStatus}">
+            <select disabled="disabled" th:field="*{cooperationStatus}">
                 <option th:each="obj:${pageListMapUtil.cooperationStatusList}"
                         th:selected="${cooperationStatus eq obj}"
                         th:value="${obj}"
@@ -65,38 +65,52 @@
 
         <div>
             <span>行业</span>
-            <select th:field="*{business}">
+            <select disabled="disabled" th:field="*{business}">
                 <option th:each="obj:${pageListMapUtil.businessList}"
                         th:selected="${business eq obj}"
                         th:value="${obj}"
-                        th:text="${obj}" >行业
+                        th:text="${obj}" >
                 </option>
             </select>
         </div>
 
         <div>
             <span>业务类型</span>
-            <label class="checkbox-inline i-checks"  th:each="obj : ${pageListMapUtil.serviceTypeList}">
-                <input th:attr="checked=${thymeleafUtil.stringContains(customer.serviceType,obj)?true:false}" type="checkbox" name="proofs[]"  th:value="${obj}" th:text ="${obj}" id="inlineCheckbox1" />
-            </label>
+            <select disabled="disabled" th:field="*{serviceType}">
+                <option th:each="obj:${pageListMapUtil.serviceTypeList}"
+                        th:selected="${serviceType eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
+            </select>
         </div>
+
+<!--        <div>-->
+<!--            <span>业务类型</span>-->
+<!--            <label class="checkbox-inline i-checks"  th:each="obj : ${pageListMapUtil.serviceTypeList}">-->
+<!--                <input th:attr="checked=${thymeleafUtil.stringContains(customer.serviceType,obj)?true:false}" type="checkbox" name="proofs[]"  th:value="${obj}" th:text ="${obj}" id="inlineCheckbox1" />-->
+<!--            </label>-->
+<!--        </div>-->
 
     </form>
 
 </div>
 
 <div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">编辑该用户</button>
+    <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">编辑该客户</button>
 </div>
 <br />
 <div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='findOrdersByCustomerId?customerId='+[[${customer.customerId}]]">查看该用户的所有订单</button>
+    <button class="btn" th:onclick="window.location.href='findOrdersByCustomerId?customerId='+[[${customer.customerId}]]">查看该客户的所有订单</button>
 </div>
 <br/>
 <div class='text1' style="text-align: center">
     <button class="btn" th:onclick="window.location.href='addNewOrderShow?customer.customerId='+[[${customer.customerId}]]">为当前客户新增订单</button>
 </div>
-
+<br/>
+<div class='text1' style="text-align: center">
+    <button class="btn" th:onclick="window.location.href='customerSystemShow'">返回客户浏览界面</button>
+</div>
 <hr />
 <br />
 

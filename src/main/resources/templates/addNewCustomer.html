@@ -30,6 +30,7 @@
         <div><span>联系人</span><input type="text" th:field="*{linkMan}" />  </div>
         <div><span>手机</span><input type="text" th:field="*{phoneNumber}" />  </div>
         <div><span>邮箱</span><input type="text" th:field="*{email}" />  </div>
+        <div><span>地区</span><input type="text" th:field="*{district}" />  </div>
 
         <div>
             <span>客户归属</span>
@@ -69,23 +70,29 @@
                 <option th:each="obj:${pageListMapUtil.businessList}"
                         th:selected="${business eq obj}"
                         th:value="${obj}"
-                        th:text="${obj}" >行业
+                        th:text="${obj}" >
                 </option>
             </select>
         </div>
 
         <div>
             <span>业务类型</span>
-            <input type ="checkbox" th:field="*{serviceType}"
-                   th:each ="obj : ${pageListMapUtil.serviceTypeList}"
-                   th:value="${obj}"
-                   th:text ="${obj}">
-<!--                   th:attr ="checked=${serviceType contains obj ? true : false}">-->
+            <select th:field="*{serviceType}">
+                <option th:each="obj:${pageListMapUtil.serviceTypeList}"
+                        th:selected="${serviceType eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
+                </option>
+            </select>
         </div>
 
-
-
-
+<!--        <div>-->
+<!--            <span>业务类型</span>-->
+<!--            <input type ="checkbox" th:field="*{serviceType}"-->
+<!--                   th:each ="obj : ${pageListMapUtil.serviceTypeList}"-->
+<!--                   th:value="${obj}"-->
+<!--                   th:text ="${obj}">-->
+<!--        </div>-->
         <!--        <div><span>合作情况</span><input type="text" th:field="*{cooperationStatus}" />  </div>-->
 
         <input type="submit" value="添加新客户" />

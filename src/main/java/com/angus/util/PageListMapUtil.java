@@ -88,6 +88,7 @@ public final class PageListMapUtil extends HashMap
         cheapConditionList.add("领导特批");
         cheapConditionList.add("协议价格");
         cheapConditionList.add("活动特惠");
+        cheapConditionList.add("正常价格");
 
         //项目进展
         projectProcessList.add("暂停作业");

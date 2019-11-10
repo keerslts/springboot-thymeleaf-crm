@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>crm 系统</title>
+    <link href="./css/commonCss.css" rel="stylesheet" type="text/css">
 </head>
+<!--<style>-->
+<!-- <link href="../../static/css/commonCss.css.css" rel="stylesheet" type="text/css">-->
+<!--</style>-->
+
 
 <body>
 
@@ -52,7 +57,7 @@
         <td th:text="${customer.customerBelong}"></td>
         <td th:text="${customer.customerType}"></td>
         <td th:text="${customer.serviceType}"></td>
-        <td th:text="${customer.followRecord}"></td>
+        <td class="label" th:text="${customer.followRecord}"></td>
 <!--        <td>-->
 <!--            <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">修改该客户信息</button>-->
 <!--        </td>-->

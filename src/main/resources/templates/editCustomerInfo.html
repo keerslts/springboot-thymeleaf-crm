@@ -69,22 +69,27 @@
                 <option th:each="obj:${pageListMapUtil.businessList}"
                         th:selected="${business eq obj}"
                         th:value="${obj}"
-                        th:text="${obj}" >行业
+                        th:text="${obj}" >
+                </option>
+            </select>
+        </div>
+        <div>
+            <span>业务类型</span>
+            <select th:field="*{serviceType}">
+                <option th:each="obj:${pageListMapUtil.serviceTypeList}"
+                        th:selected="${serviceType eq obj}"
+                        th:value="${obj}"
+                        th:text="${obj}" >
                 </option>
             </select>
         </div>
 
-        <div>
-            <span>业务类型</span>
-<!--            <label th:each="obj : ${pageListMapUtil.serviceTypeList}">-->
+<!--        <div>-->
+<!--            <span>业务类型</span>-->
 <!--                <input th:field="*{serviceType}"-->
-<!--                       th:attr="checked=${thymeleafUtil.stringContains(customer.serviceType,obj)?true:false}"-->
+<!--                       th:each="obj : ${pageListMapUtil.serviceTypeList}"-->
 <!--                       type="checkbox" th:value="${obj}" th:text="${obj}"/>-->
-<!--            </label>-->
-                <input th:field="*{serviceType}"
-                       th:each="obj : ${pageListMapUtil.serviceTypeList}"
-                       type="checkbox" th:value="${obj}" th:text="${obj}"/>
-        </div>
+<!--        </div>-->
         <input type="hidden" th:field="*{customerId}"/>
         <input type="submit" value="确认修改" />
 
