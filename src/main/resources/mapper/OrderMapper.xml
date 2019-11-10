@@ -24,17 +24,22 @@
         (orderNumber,orderDate,charge,
         orderName,orderEncode,orderType,serviceType,receiveLabor,
         specialRequest,cheapCondition,realCharge,accountCharge,tailCharge,
-        CHCost,LHCost,WWCost,projectProcess,otherRemark,calculateCharge)
+        CHCost,LHCost,WWCost,projectProcess,otherRemark,calculateCharge,salePerson,exampleName,testProject,dutyProjector,ticketStatus)
         VALUES(#{orderNumber},#{orderDate},#{charge},
         #{orderName},#{orderEncode},#{orderType},
         #{serviceType},#{receiveLabor},#{specialRequest},#{cheapCondition},#{realCharge},
         #{accountCharge},#{tailCharge},#{CHCost},#{LHCost},#{WWCost},
-        #{projectProcess},#{otherRemark},#{calculateCharge})
+        #{projectProcess},#{otherRemark},#{calculateCharge},#{salePerson},#{exampleName},#{testProject},#{dutyProjector},#{ticketStatus})
     </select>
 
     <!--    根据id查询用户信息    -->
     <select id="getOrderById" resultMap="orderBaseResultMap">
         SELECT * FROM `order` where orderId=#{orderId}
+    </select>
+    <!--    根据id查询用户信息    -->
+    <select id="getOrderCustomersByCustomerId" resultMap="orderBaseResultMap">
+        SELECT * FROM `order` o1 left join res_orderCustomer r1 on o1.orderId=r1.orderId LEFT JOIN customer c1 ON
+        r1.customerId=c1.customerId where r1.customerId=#{customerId}
     </select>
 
     <select id="getLastOrderNumber" resultType="java.lang.Integer">
@@ -42,7 +47,7 @@
     </select>
 
     <select id="getOrderByEncode" resultType="java.lang.Integer">
-        SELECT orderId FROM `order` where orderEncode=#{orderEncode}
+        SELECT orderId FROM `order` where orderEncode=#{orderEncode} LIMIT 0,1
     </select>
 
     <!--    根据id删除用户信息    -->
@@ -53,8 +58,12 @@
     <!--    根据id更新用户信息    -->
     <update id="updateOrder">
         UPDATE `order` set
-        orderName=#{orderName},orderNumber=#{orderNumber},orderDate=#{orderDate},serviceProject=#{serviceProject},
-        charge=#{charge},moneySituation=#{moneySituation},serviceStatus=#{serviceStatus}
+        orderName=#{orderName},orderNumber=#{orderNumber},orderDate=#{orderDate},charge=#{charge},orderEncode=#{orderEncode},
+        orderType=#{orderType},serviceType=#{serviceType},receiveLabor=#{receiveLabor},specialRequest=#{specialRequest},
+        cheapCondition=#{cheapCondition},realCharge=#{realCharge},accountCharge=#{accountCharge},tailCharge=#{tailCharge},
+        CHCost=#{CHCost},LHCost=#{LHCost},WWCost=#{WWCost},projectProcess=#{projectProcess},
+        otherRemark=#{otherRemark},exampleName=#{exampleName},testProject=#{testProject},dutyProjector=#{dutyProjector},
+        ticketStatus=#{ticketStatus},salePerson=#{salePerson},calculateCharge=#{calculateCharge}
         where orderId=#{orderId}
     </update>
 

@@ -62,18 +62,6 @@ public class CustomerSystemController {
                                       @ModelAttribute("pageListMapUtil")
                                               PageListMapUtil pageListMapUtil) {
 
-//
-//        Map<String,String> b = new HashMap<>();
-//        b.put("1","a");
-//        b.put("2","b");
-//        mapList.add(b);
-//        List a = new ArrayList();
-//        a.add("2");
-//        a.add("5");
-//        customer.setServiceType(a);
-//        customer.setBusiness("建筑助剂");
-//        customer.setCustomerBelong("xxx");
-
         return ADD_NEW_CUSTOMER;
     }
 
@@ -109,7 +97,6 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/editCustomerInfo")
-//    public String editCustomerInfo(HttpServletRequest request, @ModelAttribute("customer") Customer customer) {
     public String editCustomerInfo(@ModelAttribute("customer") Customer customer, @ModelAttribute("thymeleafUtil") ThymeleafUtil thymeleafUtil,
                                    @ModelAttribute("pageListMapUtil") PageListMapUtil pageListMapUtil) {
 

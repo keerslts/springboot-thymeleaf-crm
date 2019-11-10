@@ -35,4 +35,6 @@ public interface OrderService
     ArrayList<Integer> getLastOrderNumber();
 
     int getOrderByEncode(String orderEncode);
+
+    List<Map> getOrderCustomersByCustomerId(Integer customerId);
 }

@@ -81,9 +81,8 @@ public final class PageListMapUtil extends HashMap
         orderServiceTypeList.add("立项研发");
 
         //承接实验室
-        receiveLaborList.add("常州化学研究所");
-        receiveLaborList.add("联泓（江苏）新材料研究院");
-        receiveLaborList.add("委外实验室");
+        receiveLaborList.add("常化所");
+        receiveLaborList.add("联泓");
 
         //优惠条件
         cheapConditionList.add("领导特批");

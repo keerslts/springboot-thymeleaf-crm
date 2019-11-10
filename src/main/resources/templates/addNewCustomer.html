@@ -79,8 +79,8 @@
             <input type ="checkbox" th:field="*{serviceType}"
                    th:each ="obj : ${pageListMapUtil.serviceTypeList}"
                    th:value="${obj}"
-                   th:text ="${obj}"
-                   th:attr ="checked=${serviceType contains obj ? true : false}">
+                   th:text ="${obj}">
+<!--                   th:attr ="checked=${serviceType contains obj ? true : false}">-->
         </div>
 
 

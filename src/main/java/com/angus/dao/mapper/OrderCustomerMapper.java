@@ -21,4 +21,6 @@ public interface OrderCustomerMapper
     Integer getResOrderCustomer(Integer customerId, Integer orderId);
 
     void deleteResOrderCustomerByOrderId(Integer orderId);
+
+    List<Map> getOrderCustomersByCustomerId(Integer customerId);
 }

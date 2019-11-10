@@ -57,7 +57,8 @@
         ifnull(dutyProjector, '') dutyProjector,
         ifnull(ticketStatus, '') ticketStatus,
         ifnull(salePerson, '') salePerson,
-        ifnull(calculateCharge, '') calculateCharge
+        ifnull(calculateCharge, '') calculateCharge,
+        ifnull(customerType, '') customerType
 
         FROM
         `order` o1
@@ -85,6 +86,54 @@
 
     <select id="deleteResOrderCustomerByOrderId">
         delete from res_orderCustomer where orderId=#{orderId};
+    </select>
+
+    <select id="getOrderCustomersByCustomerId" resultType="java.util.Map">
+        <!--        SELECT * FROM `order` o1 left join res_orderCustomer r1 on o1.orderId=r1.orderId LEFT JOIN customer c1 ON-->
+        <!--        r1.customerId=c1.customerId-->
+        SELECT
+        ifnull(orderNumber, '') orderNumber,
+        ifnull(charge, '') charge,
+        ifnull(business, '') business,
+        ifnull(o1.orderId, '') orderId,
+        ifnull(cooperationStatus, '') cooperationStatus,
+        ifnull(moneySituation, '') moneySituation,
+        ifnull(serviceProject, '') serviceProject,
+        ifnull(linkMan, '') linkMan,
+        ifnull(phoneNumber, '') phoneNumber,
+        ifnull(serviceStatus, '') serviceStatus,
+        ifnull(district, '') district,
+        ifnull(c1.customerId, '') customerId,
+        ifnull(`name`, '') customerName,
+        ifnull(r1.Id, '') Id,
+        ifnull(orderDate, '') orderDate,
+        ifnull(email, '') email,
+        ifnull(orderName, '') orderName,
+        ifnull(orderEncode, '') orderEncode,
+        ifnull(orderType, '') orderType,
+        ifnull(o1.serviceType, '') serviceType,
+        ifnull(receiveLabor, '') receiveLabor,
+        ifnull(specialRequest, '') specialRequest,
+        ifnull(realCharge, '') realCharge,
+        ifnull(accountCharge, '') accountCharge,
+        ifnull(tailCharge, '') tailCharge,
+        ifnull(CHCost, '') CHCost,
+        ifnull(LHCost, '') LHCost,
+        ifnull(WWCost, '') WWCost,
+        ifnull(projectProcess, '') projectProcess,
+        ifnull(otherRemark, '') otherRemark,
+        ifnull(exampleName, '') exampleName,
+        ifnull(testProject, '') testProject,
+        ifnull(dutyProjector, '') dutyProjector,
+        ifnull(ticketStatus, '') ticketStatus,
+        ifnull(salePerson, '') salePerson,
+        ifnull(calculateCharge, '') calculateCharge,
+        ifnull(customerType, '') customerType
+
+        FROM
+        `order` o1
+        LEFT JOIN res_orderCustomer r1 ON o1.orderId = r1.orderId
+        LEFT JOIN customer c1 ON r1.customerId = c1.customerId where r1.customerId=#{customerId}
     </select>
 
 

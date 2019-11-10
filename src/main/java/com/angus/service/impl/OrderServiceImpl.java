@@ -92,5 +92,10 @@ public class OrderServiceImpl implements OrderService
         return orderMapper.getOrderByEncode(orderEncode);
     }
 
+    @Override
+    public List<Map> getOrderCustomersByCustomerId(Integer customerId) {
+        return orderCustomerMapper.getOrderCustomersByCustomerId(customerId);
+    }
+
 
 }
