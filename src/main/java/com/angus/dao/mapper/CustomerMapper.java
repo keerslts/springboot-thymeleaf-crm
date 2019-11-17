@@ -18,4 +18,6 @@ public interface CustomerMapper
     void updateCustomer(Customer customer);
 
     void updateFollowRecord(Customer customer);
+
+    List<Customer> getCustomerByLike(String findOneCustomer);
 }

@@ -49,6 +49,11 @@
     <update id="updateFollowRecord" >
         UPDATE customer set followRecord=#{followRecord} where customerId=#{customerId}
     </update>
+    <!--    根据id更新用户信息    -->
+    <select id="getCustomerByLike" resultMap="baseResultMap">
+        SELECT * FROM customer where name like #{findOneCustomer} or linkMan like #{findOneCustomer} or
+        phoneNumber like #{findOneCustomer} or email like #{findOneCustomer}
+    </select>
 
 
 </mapper>

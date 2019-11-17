@@ -2,6 +2,7 @@ package com.angus.web;
 
 import com.angus.dao.pojo.Customer;
 import com.angus.dao.pojo.OrderCustomer;
+import com.angus.dao.pojo.UtilVO;
 import com.angus.service.CustomerService;
 import com.angus.util.PageListMapUtil;
 import com.angus.util.ThymeleafUtil;
@@ -44,7 +45,7 @@ public class CustomerSystemController {
      * @return
      */
     @RequestMapping("/customerSystemShow")
-    public String showCustomerSystem(ModelMap map) {
+    public String showCustomerSystem(ModelMap map, @ModelAttribute("utilVO") UtilVO utilVO) {
 
         getAllCustomers(map);
         return CUSTOMER_SYSTEM_SHOW;
@@ -55,6 +56,7 @@ public class CustomerSystemController {
         List<Customer> customerList = new ArrayList<Customer>();
         customerList = customerService.getAllCustomers();
         map.put("customerList", customerList);
+        map.put("findOneCustomer", "");
     }
 
     @RequestMapping("/addNewCustomerShow")
@@ -89,7 +91,7 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/addNewCustomer")
-    public String addNewCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map, @ModelAttribute("serviceTypeList") ArrayList<String> serviceTypeList) {
+    public String addNewCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer,  @ModelAttribute("utilVO") UtilVO utilVO, ModelMap map, @ModelAttribute("serviceTypeList") ArrayList<String> serviceTypeList) {
 
         customerService.addNewCustomer(customer);
         getAllCustomers(map);
@@ -120,7 +122,7 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/updateCustomer")
-    public String updateCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String updateCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, @ModelAttribute("utilVO") UtilVO utilVO, ModelMap map) {
 
         customerService.updateCustomer(customer);
         getAllCustomers(map);
@@ -128,7 +130,7 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/updateFollowRecord")
-    public String updateFollowRecord(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String updateFollowRecord(HttpServletRequest request, @ModelAttribute("customer") Customer customer, @ModelAttribute("utilVO") UtilVO utilVO, ModelMap map) {
 
         customerService.updateFollowRecord(customer);
         getAllCustomers(map);
@@ -136,7 +138,7 @@ public class CustomerSystemController {
     }
 
     @RequestMapping("/deleteCurrentCustomer")
-    public String deleteCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, ModelMap map) {
+    public String deleteCustomer(HttpServletRequest request, @ModelAttribute("customer") Customer customer, @ModelAttribute("utilVO") UtilVO utilVO, ModelMap map) {
 
         customerService.deleteCustomerById(customer.getCustomerId());
         getAllCustomers(map);
@@ -151,4 +153,20 @@ public class CustomerSystemController {
         map.put("orderCustomerId", orderCustomer.getId());
         return CHOOSE_ONE_CUSTOMER;
     }
+
+    @RequestMapping("/findOneCustomer")
+    public String findOneCustomer(HttpServletRequest request, @ModelAttribute("utilVO") UtilVO utilVO, ModelMap map) {
+
+        getCustomerByLike(utilVO, map);
+        return CUSTOMER_SYSTEM_SHOW;
+    }
+
+    private void getCustomerByLike(UtilVO utilVO, ModelMap map) {
+
+        String findOneCustomer = "%" + utilVO.getMessage() + "%";
+        List<Customer> customerList = new ArrayList<Customer>();
+        customerList = customerService.getCustomerByLike(findOneCustomer);
+        map.put("customerList", customerList);
+    }
+
 }

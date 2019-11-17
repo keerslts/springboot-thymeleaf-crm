@@ -5,10 +5,6 @@
     <title>crm 系统</title>
     <link href="./css/commonCss.css" rel="stylesheet" type="text/css">
 </head>
-<!--<style>-->
-<!-- <link href="../../static/css/commonCss.css.css" rel="stylesheet" type="text/css">-->
-<!--</style>-->
-
 
 <body>
 
@@ -25,9 +21,15 @@
 <br />
 <br />
 <br />
+
+<form action="#" th:action="@{/findOneCustomer}" th:object="${utilVO}" method="post">
+    <input type="text" th:field="*{message}"/>
+    <input type="submit" value="搜索相关客户" />
+</form>
+
 <table style="text-align: center;margin: auto" border="3">
 <tr>
-    <td>ID</td>
+<!--    <td>ID</td>-->
     <td>行业</td>
     <td>客户名称</td>
     <td>联系人</td>
@@ -45,8 +47,7 @@
 </tr>
 
     <tr th:each="customer:${customerList}">
-<!--        <input type="hidden" th:field="${customer.id}" />-->
-        <td type="hidden" th:text="${customer.customerId}"></td>
+<!--        <td type="hidden" th:text="${customer.customerId}"></td>-->
         <td th:text="${customer.business}"></td>
         <td th:text="${customer.name}"></td>
         <td th:text="${customer.linkMan}"></td>
@@ -58,9 +59,7 @@
         <td th:text="${customer.customerType}"></td>
         <td th:text="${customer.serviceType}"></td>
         <td class="label" th:text="${customer.followRecord}"></td>
-<!--        <td>-->
-<!--            <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">修改该客户信息</button>-->
-<!--        </td>-->
+
         <td>
             <button class="view" th:onclick="window.location.href='viewCustomerInfo?customerId='+[[${customer.customerId}]]">浏览该客户信息</button>
         </td>

@@ -18,4 +18,6 @@ public interface CustomerService
     void deleteCustomerById(Integer id);
 
     void updateFollowRecord(Customer customer);
+
+    List<Customer> getCustomerByLike(String findOneCustomer);
 }

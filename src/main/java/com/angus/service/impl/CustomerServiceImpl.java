@@ -45,4 +45,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateFollowRecord(Customer customer) {
         customerMapper.updateFollowRecord(customer);
     }
+
+    @Override
+    public List<Customer> getCustomerByLike(String findOneCustomer) {
+        return customerMapper.getCustomerByLike(findOneCustomer);
+    }
 }
