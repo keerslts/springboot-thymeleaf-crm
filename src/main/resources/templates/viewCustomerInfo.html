@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>crm 系统</title>
@@ -8,123 +8,114 @@
 <script src="./js/jQuery.js"></script>
 <script src="./js/editUserInfo.js"></script>
 
-<body>
+<body bgcolor="#F0FFFF" >
 
-<br />
-<h1 style="text-align: center;width:100%;">CRM管理系统</h1>
-<br />
-<h1 style="text-align: center;width:100%;">新增客户信息</h1>
-<br />
-<br />
-<div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='index'">回到首页</button>
+<div class='text1' style="text-align: center;">
+    <font size="7" style="text-align: center;width:100%;">浏览客户信息</font>
+    </br>
+    <button class="btn" style='font-size:20px' th:onclick="window.location.href='index'">回到首页</button>
 </div>
 <hr />
-<br />
-<br />
-<br />
-<div class='text1' style="text-align: center">
     <!-- 表单提交用户信息,注意字段的设置,直接是*{} -->
     <form action="#" th:action="@{/}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
-        <div><span>名称</span><input readonly="true" type="text" th:field="*{name}"/>  </div>
-        <div><span>联系人</span><input readonly="true" type="text" th:field="*{linkMan}" />  </div>
-        <div><span>手机</span><input readonly="true" type="text" th:field="*{phoneNumber}" />  </div>
-        <div><span>邮箱</span><input readonly="true" type="text" th:field="*{email}" />  </div>
-
-        <div>
-            <span>客户归属</span>
-            <select disabled="disabled" th:field="*{customerBelong}">
-                <option th:each="obj:${pageListMapUtil.customerBelongList}"
-                        th:selected="${customerBelong eq obj}"
-                        th:value="${obj}"
-                        th:text="${obj}" >
-                </option>
-            </select>
+        <div id="left1" style="background-color:#F0F8FF;height:400px;width:30%;float:left;">
+        </div>
+        <div id="left" style="background-color:#F0F8FF;height:400px;width:15%;float:left;">
+            <div><font size="6">名&nbsp;&nbsp;&nbsp;&nbsp;称: </font><input readonly="true" type="text" th:field="*{name}"/>  </div>
+            </br>
+            <div><font size="6">联系人: </font><input readonly="true" type="text" th:field="*{linkMan}" /></div>
+            </br>
+            <div>
+                <font size="6">客户归属: </font>
+                <select disabled="disabled" th:field="*{customerBelong}">
+                    <option th:each="obj:${pageListMapUtil.customerBelongList}"
+                            th:selected="${customerBelong eq obj}"
+                            th:value="${obj}"
+                            th:text="${obj}" >
+                    </option>
+                </select>
+            </div>
+            </br>
+            <div>
+                <font size="6">合作状态: </font>
+                <select disabled="disabled" th:field="*{cooperationStatus}">
+                    <option th:each="obj:${pageListMapUtil.cooperationStatusList}"
+                            th:selected="${cooperationStatus eq obj}"
+                            th:value="${obj}"
+                            th:text="${obj}" >
+                    </option>
+                </select>
+            </div>
+            </br>
+            <div>
+                <font size="6">业务类型: </font>
+                <select disabled="disabled" th:field="*{serviceType}">
+                    <option th:each="obj:${pageListMapUtil.serviceTypeList}"
+                            th:selected="${serviceType eq obj}"
+                            th:value="${obj}"
+                            th:text="${obj}" >
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <span>客户类型</span>
-            <select disabled="disabled" th:field="*{customerType}">
-                <option th:each="obj:${pageListMapUtil.customerTypeList}"
-                        th:selected="${customerType eq obj}"
-                        th:value="${obj}"
-                        th:text="${obj}" >
-                </option>
-            </select>
-        </div>
-        <div>
-            <span>合作状态</span>
-            <select disabled="disabled" th:field="*{cooperationStatus}">
-                <option th:each="obj:${pageListMapUtil.cooperationStatusList}"
-                        th:selected="${cooperationStatus eq obj}"
-                        th:value="${obj}"
-                        th:text="${obj}" >
-                </option>
-            </select>
+        <div id="left4" style="background-color:#F0F8FF;height:400px;width:15%;float:left;">
         </div>
 
-        <div>
-            <span>行业</span>
-            <select disabled="disabled" th:field="*{business}">
-                <option th:each="obj:${pageListMapUtil.businessList}"
-                        th:selected="${business eq obj}"
-                        th:value="${obj}"
-                        th:text="${obj}" >
-                </option>
-            </select>
+        <div id="middle" style="background-color:#F0F8FF;height:400px;width:25%;float:left;">
+            <div><font size="6">邮&nbsp;&nbsp;&nbsp;&nbsp;箱: </font><input readonly="true" type="text" th:field="*{email}" />  </div>
+            </br>
+            <div><font size="6">手&nbsp;&nbsp;&nbsp;&nbsp;机: </font><input readonly="true" type="text" th:field="*{phoneNumber}" />  </div>
+            </br>
+            <div>
+                <font size="6">客户类型: </font>
+                <select disabled="disabled" th:field="*{customerType}">
+                    <option th:each="obj:${pageListMapUtil.customerTypeList}"
+                            th:selected="${customerType eq obj}"
+                            th:value="${obj}"
+                            th:text="${obj}" >
+                    </option>
+                </select>
+            </div>
+            </br>
+            <div>
+                <font size="6">行&nbsp;&nbsp;&nbsp;&nbsp;业: </font>
+                <select disabled="disabled" th:field="*{business}">
+                    <option th:each="obj:${pageListMapUtil.businessList}"
+                            th:selected="${business eq obj}"
+                            th:value="${obj}"
+                            th:text="${obj}" >
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <span>业务类型</span>
-            <select disabled="disabled" th:field="*{serviceType}">
-                <option th:each="obj:${pageListMapUtil.serviceTypeList}"
-                        th:selected="${serviceType eq obj}"
-                        th:value="${obj}"
-                        th:text="${obj}" >
-                </option>
-            </select>
+        <div id="left5" style="background-color:#F0F8FF;height:400px;width:15%;float:left;">
         </div>
-
-<!--        <div>-->
-<!--            <span>业务类型</span>-->
-<!--            <label class="checkbox-inline i-checks"  th:each="obj : ${pageListMapUtil.serviceTypeList}">-->
-<!--                <input th:attr="checked=${thymeleafUtil.stringContains(customer.serviceType,obj)?true:false}" type="checkbox" name="proofs[]"  th:value="${obj}" th:text ="${obj}" id="inlineCheckbox1" />-->
-<!--            </label>-->
-<!--        </div>-->
-
     </form>
 
-</div>
 
 <div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">编辑该客户</button>
+    <button style='font-size:20px' class="btn" th:onclick="window.location.href='editCustomerInfo?customerId='+[[${customer.customerId}]]">编辑该客户</button>
+    <button style='font-size:20px' class="btn" th:onclick="window.location.href='findOrdersByCustomerId?customerId='+[[${customer.customerId}]]">查看该客户的所有订单</button>
+    <button style='font-size:20px' class="btn" th:onclick="window.location.href='addNewOrderShow?customer.customerId='+[[${customer.customerId}]]">为当前客户新增订单</button>
+    <button style='font-size:20px' class="btn" th:onclick="window.location.href='customerSystemShow'">返回客户浏览界面</button>
 </div>
-<br />
-<div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='findOrdersByCustomerId?customerId='+[[${customer.customerId}]]">查看该客户的所有订单</button>
-</div>
-<br/>
-<div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='addNewOrderShow?customer.customerId='+[[${customer.customerId}]]">为当前客户新增订单</button>
-</div>
-<br/>
-<div class='text1' style="text-align: center">
-    <button class="btn" th:onclick="window.location.href='customerSystemShow'">返回客户浏览界面</button>
-</div>
+
 <hr />
 <br />
 
 <div class='' style="text-align: center">
-    <button class="followRecordBtn" th:onclick="changeFollowRecordStatus()">激活跟进记录</button>
+    <button style='font-size:20px' class="followRecordBtn" th:onclick="changeFollowRecordStatus()">激活跟进记录</button>
 </div>
 
 <div id="followRecordDiv" style="text-align: center; display: none">
 
     <form action="#" th:action="@{/updateFollowRecord}" th:object="${customer}" method="post" onSubmit="return checkUpdateUser()">
 
-        <div><span>跟进记录</span><input type="text" th:field="*{followRecord}" />  </div>
+        <div><font size="6">跟进记录: </font><input style='font-size:20px' type="text" th:field="*{followRecord}" />  </div>
         <input type="hidden" th:field="*{customerId}"/>
-        <input type="submit" value="提交跟进记录" />
+        <input style='font-size:20px' type="submit" value="提交跟进记录" />
 
     </form>
 

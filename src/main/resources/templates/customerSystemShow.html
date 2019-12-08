@@ -21,12 +21,13 @@
 <br />
 <br />
 <br />
-
+<div class='text1' style="text-align: center">
 <form action="#" th:action="@{/findOneCustomer}" th:object="${utilVO}" method="post">
     <input type="text" th:field="*{message}"/>
     <input type="submit" value="搜索相关客户" />
 </form>
-
+</div>
+<br />
 <table style="text-align: center;margin: auto" border="3">
 <tr>
 <!--    <td>ID</td>-->
